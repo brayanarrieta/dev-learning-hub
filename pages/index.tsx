@@ -1,13 +1,13 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
-import { useUser } from "@auth0/nextjs-auth0";
+import { useUser } from '@auth0/nextjs-auth0';
 
 const Home = () => {
   const { user, error, isLoading } = useUser();
- 
+
   if (isLoading) return <div>Loading...</div>;
- 
+
   if (error) return <div>{error.message}</div>;
- 
+
   if (user) {
     return (
       <div>
@@ -18,6 +18,6 @@ const Home = () => {
     );
   }
   return <a href="/api/auth/login">Login</a>;
- };
+};
 
 export default Home;
