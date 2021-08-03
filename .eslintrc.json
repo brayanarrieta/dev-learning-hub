@@ -23,6 +23,8 @@
     ],
     "rules": {
         "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
-        "react/jsx-props-no-spreading": "off"
+        "react/jsx-props-no-spreading": "off",
+        "no-use-before-define": "off",
+        "import/extensions": ["error", "ignorePackages", { "ts": "never", "tsx": "never" } ]
     }
 }
