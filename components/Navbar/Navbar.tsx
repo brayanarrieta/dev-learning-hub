@@ -69,26 +69,17 @@ const Navbar = () => {
           spacing={6}
         >
           <Button
-            as="a"
-            fontSize="sm"
-            fontWeight={400}
-            variant="link"
-            href={SIGN_IN_URL}
-          >
-            Sign In
-          </Button>
-          <Button
-            display={{ base: 'none', md: 'inline-flex' }}
             fontSize="sm"
             fontWeight={600}
             color="white"
             bg="pink.400"
-            href="#"
+            as="a"
+            href={SIGN_IN_URL}
             _hover={{
               bg: 'pink.300',
             }}
           >
-            Sign Up
+            Sign In
           </Button>
         </Stack>
       </Flex>
