@@ -1,7 +1,7 @@
 import React from 'react';
-import Navbar from '../components/Navbar/Navbar';
-import FeaturesGrid from '../custom-components/FeaturesGrid';
-import HeroLandingPage from '../custom-components/HeroLandingPage';
+import Navbar from '../custom-components/LandingPage/Navbar/Navbar';
+import FeaturesGrid from '../custom-components/LandingPage/FeaturesGrid';
+import HeroLandingPage from '../custom-components/LandingPage/HeroLandingPage';
 
 const Index = () => (
   <>

@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/icons';
 import DesktopNavbar from './DesktopNavbar';
 import MobileNavbar from './MobileNavbar';
-import { SIGN_IN_URL } from '../../config';
+import { SIGN_IN_URL } from '../../../config';
 
 const Navbar = () => {
   const { isOpen, onToggle } = useDisclosure();

@@ -12,11 +12,11 @@ const Home = () => {
 
   if (user) {
     return (
-        <Layout >
-          <h2>{user.name}</h2>
-          <p>{user.email}</p>
-          <a href="/api/auth/logout">Logout</a>
-        </Layout>
+      <Layout>
+        <h2>{user.name}</h2>
+        <p>{user.email}</p>
+        <a href="/api/auth/logout">Logout</a>
+      </Layout>
     );
   }
   return <a href="/api/auth/login">Login</a>;

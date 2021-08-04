@@ -5,8 +5,8 @@ import {
   Link,
   useColorModeValue,
 } from '@chakra-ui/react';
-import NAV_ITEMS from '../../constants';
-import { NavItem } from '../../types';
+import NAV_ITEMS from '../../../constants';
+import { NavItem } from '../../../types';
 
 const MobileNavbar = () => (
   <Stack
