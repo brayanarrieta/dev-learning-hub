@@ -1,5 +1,4 @@
 import {
-  FiHome,
   FiTrendingUp,
   FiCompass,
   FiStar,
@@ -7,17 +6,18 @@ import {
 } from 'react-icons/fi';
 import { IconType } from 'react-icons';
 
-interface LinkItemProps {
+interface LinkItem {
   name: string;
   icon: IconType;
+  link: string;
 }
 
-const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome },
-  { name: 'Trending', icon: FiTrendingUp },
-  { name: 'Explore', icon: FiCompass },
-  { name: 'Favorites', icon: FiStar },
-  { name: 'Settings', icon: FiSettings },
+const LinkItems: Array<LinkItem> = [
+  { name: 'Interview Questions', icon: FiTrendingUp, link: '#' },
+  { name: 'Interview Quiz', icon: FiCompass, link: '#' },
+  { name: 'CheatSheets Collection', icon: FiStar, link: '#' },
+  { name: 'Free Online Courses', icon: FiSettings, link: '#' },
+  { name: 'Community Requests', icon: FiSettings, link: '#' },
 ];
 
 export default LinkItems;

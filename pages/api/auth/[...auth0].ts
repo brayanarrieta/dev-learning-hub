@@ -1,5 +1,5 @@
 import { handleAuth, handleLogin } from '@auth0/nextjs-auth0';
-import { DASHBOARD_URL } from '../../../config';
+import { DASHBOARD_URL } from '../../../constants/pageURLs';
 
 export default handleAuth({
   // To redirect after login successfully

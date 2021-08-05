@@ -10,11 +10,11 @@ import { IconType } from 'react-icons';
 interface NavItemProps extends FlexProps {
     icon: IconType;
     children: ReactText;
+    link: string;
   }
 
-const NavItem = ({ icon, children, ...rest }: NavItemProps) => (
-  // eslint-disable-next-line jsx-a11y/anchor-is-valid
-  <Link href="#" style={{ textDecoration: 'none' }}>
+const NavItem = ({ icon, children, link, ...rest }: NavItemProps) => (
+  <Link href={link} style={{ textDecoration: 'none' }}>
     <Flex
       align="center"
       p="4"
@@ -23,7 +23,7 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => (
       role="group"
       cursor="pointer"
       _hover={{
-        bg: 'cyan.400',
+        bg: 'teal.400',
         color: 'white',
       }}
       {...rest}

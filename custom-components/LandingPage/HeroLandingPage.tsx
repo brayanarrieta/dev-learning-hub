@@ -10,7 +10,8 @@ import {
   useColorModeValue,
   createIcon,
 } from '@chakra-ui/react';
-import { DASHBOARD_URL, SIGN_IN_URL } from '../../config';
+import { APPLICATION_NAME } from '../../constants/config';
+import { DASHBOARD_URL, SIGN_IN_URL } from '../../constants/pageURLs';
 
 const Arrow = createIcon({
   displayName: 'Arrow',
@@ -53,7 +54,7 @@ const HeroLandingPage = (props: HeroLandingPageProps) => {
             lineHeight="110%"
             color="green.400"
           >
-            Dev Learning Hub
+            {APPLICATION_NAME}
           </Heading>
           <Text color="gray.500">
             Dev Learning Hub a place to share your knowledge with other developers

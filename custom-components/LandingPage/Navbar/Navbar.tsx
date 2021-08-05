@@ -16,7 +16,8 @@ import {
 } from '@chakra-ui/icons';
 import DesktopNavbar from './DesktopNavbar';
 import MobileNavbar from './MobileNavbar';
-import { DASHBOARD_URL, SIGN_IN_URL } from '../../../config';
+import { DASHBOARD_URL, SIGN_IN_URL } from '../../../constants/pageURLs';
+import { APPLICATION_NAME } from '../../../constants/config';
 
 interface NavbarProps {
   isLoggedIn: boolean
@@ -59,7 +60,7 @@ const Navbar = (props: NavbarProps) => {
             fontFamily="heading"
             color={useColorModeValue('gray.800', 'white')}
           >
-            Dev Learning Hub
+            {APPLICATION_NAME}
           </Text>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
