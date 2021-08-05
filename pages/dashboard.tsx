@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
-import { useUser } from '@auth0/nextjs-auth0';
+import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0';
 import React from 'react';
 import Layout from '../components/Layout';
 
@@ -21,5 +21,7 @@ const Dashboard = () => {
   }
   return <a href="/api/auth/login">Login</a>;
 };
+
+export const getServerSideProps = withPageAuthRequired();
 
 export default Dashboard;
