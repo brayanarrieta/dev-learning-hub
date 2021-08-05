@@ -42,7 +42,7 @@ const UserStack = () => {
     <HStack>
       <Avatar
         size="sm"
-        src={user.picture}
+        src={user.picture || ''}
       />
       <VStack
         display={{ base: 'none', md: 'flex' }}
