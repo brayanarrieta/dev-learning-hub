@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0';
 import React from 'react';
-import Layout from '../components/Layout';
+import SidebarWithHeader from '../custom-components/Layout/SidebarWithHeader';
 
 const Dashboard = () => {
   const { user, error, isLoading } = useUser();
@@ -12,11 +12,11 @@ const Dashboard = () => {
 
   if (user) {
     return (
-      <Layout>
+      <SidebarWithHeader>
         <h2>{user.name}</h2>
         <p>{user.email}</p>
         <a href="/api/auth/logout">Logout</a>
-      </Layout>
+      </SidebarWithHeader>
     );
   }
   return <a href="/api/auth/login">Login</a>;
