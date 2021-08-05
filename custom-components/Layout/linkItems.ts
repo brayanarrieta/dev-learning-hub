@@ -1,8 +1,9 @@
 import {
-  FiTrendingUp,
-  FiCompass,
   FiStar,
-  FiSettings,
+  FiAward,
+  FiBookOpen,
+  FiUsers,
+  FiBook,
 } from 'react-icons/fi';
 import { IconType } from 'react-icons';
 
@@ -13,11 +14,11 @@ interface LinkItem {
 }
 
 const LinkItems: Array<LinkItem> = [
-  { name: 'Interview Questions', icon: FiTrendingUp, link: '#' },
-  { name: 'Interview Quiz', icon: FiCompass, link: '#' },
+  { name: 'Interview Questions', icon: FiBookOpen, link: '#' },
+  { name: 'Interview Quiz', icon: FiBook, link: '#' },
   { name: 'CheatSheets Collection', icon: FiStar, link: '#' },
-  { name: 'Free Online Courses', icon: FiSettings, link: '#' },
-  { name: 'Community Requests', icon: FiSettings, link: '#' },
+  { name: 'Free Online Courses', icon: FiAward, link: '#' },
+  { name: 'Community Requests', icon: FiUsers, link: '#' },
 ];
 
 export default LinkItems;
