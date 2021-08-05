@@ -16,10 +16,15 @@ import {
 } from '@chakra-ui/icons';
 import DesktopNavbar from './DesktopNavbar';
 import MobileNavbar from './MobileNavbar';
-import { SIGN_IN_URL } from '../../../config';
+import { DASHBOARD_URL, SIGN_IN_URL } from '../../../config';
 
-const Navbar = () => {
+interface NavbarProps {
+  isLoggedIn: boolean
+}
+
+const Navbar = (props: NavbarProps) => {
   const { isOpen, onToggle } = useDisclosure();
+  const { isLoggedIn } = props;
 
   return (
     <Box>
@@ -74,12 +79,12 @@ const Navbar = () => {
             color="white"
             bg="pink.400"
             as="a"
-            href={SIGN_IN_URL}
+            href={isLoggedIn ? DASHBOARD_URL : SIGN_IN_URL}
             _hover={{
               bg: 'pink.300',
             }}
           >
-            Sign In
+            { isLoggedIn ? 'Go to Dashboard' : 'Sign In' }
           </Button>
         </Stack>
       </Flex>

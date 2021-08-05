@@ -3,7 +3,7 @@ import { useUser } from '@auth0/nextjs-auth0';
 import React from 'react';
 import Layout from '../components/Layout';
 
-const Home = () => {
+const Dashboard = () => {
   const { user, error, isLoading } = useUser();
 
   if (isLoading) return <div>Loading...</div>;
@@ -22,4 +22,4 @@ const Home = () => {
   return <a href="/api/auth/login">Login</a>;
 };
 
-export default Home;
+export default Dashboard;

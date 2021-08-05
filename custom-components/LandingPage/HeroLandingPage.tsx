@@ -10,7 +10,7 @@ import {
   useColorModeValue,
   createIcon,
 } from '@chakra-ui/react';
-import { SIGN_IN_URL } from '../../config';
+import { DASHBOARD_URL, SIGN_IN_URL } from '../../config';
 
 const Arrow = createIcon({
   displayName: 'Arrow',
@@ -25,7 +25,11 @@ const Arrow = createIcon({
   ),
 });
 
-export default function HeroLandingPage() {
+interface HeroLandingPageProps {
+  isLoggedIn: boolean
+}
+const HeroLandingPage = (props: HeroLandingPageProps) => {
+  const { isLoggedIn } = props;
   return (
     <>
       <Head>
@@ -70,7 +74,7 @@ export default function HeroLandingPage() {
                 bg: 'green.500',
               }}
               as="a"
-              href={SIGN_IN_URL}
+              href={isLoggedIn ? DASHBOARD_URL : SIGN_IN_URL}
             >
               Start to share and learn
             </Button>
@@ -99,4 +103,6 @@ export default function HeroLandingPage() {
       </Container>
     </>
   );
-}
+};
+
+export default HeroLandingPage;
