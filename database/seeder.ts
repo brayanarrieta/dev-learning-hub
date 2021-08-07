@@ -1,8 +1,12 @@
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
 import { bulkInsertCourses, truncateCourses } from '../dal/courseRepository';
-import dbConnect from './dbConnect';
 import COURSES_SEEDS from './seeds/coursesSeeds';
 
-// TODO: Fix problem with environment variables
+dotenv.config({
+  path: './.env.local',
+});
+
 const truncate = async () => {
   await truncateCourses();
 };
@@ -13,7 +17,14 @@ const importData = async () => {
 
 const seeder = async () => {
   try {
-    await dbConnect();
+    const mongoURI = process.env.MONGO_URI;
+    // @ts-ignore as the env variable cannot be undefined
+    await mongoose.connect(mongoURI, {
+      useFindAndModify: false,
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+    });
 
     await truncate();
     await importData();

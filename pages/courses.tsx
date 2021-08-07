@@ -3,12 +3,11 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import React from 'react';
-import { getAccessToken, withPageAuthRequired } from '@auth0/nextjs-auth0';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { Course } from '../types';
 import SidebarWithHeader from '../custom-components/Layout/SidebarWithHeader';
 import CourseCard from '../custom-components/CourseCard';
 import { makeRequest } from '../helpers/makeRequest';
-import { integrateAuthorizationHeader } from '../helpers/requestHeaderHelpers';
 import { GET_API_COURSES } from '../constants/apiURLs';
 
 interface CoursesProps {
@@ -34,13 +33,11 @@ const Courses = (props: CoursesProps) => {
 };
 
 export const getServerSideProps = withPageAuthRequired({
-  async getServerSideProps({ req, res }) {
-    const { accessToken } = await getAccessToken(req, res);
-
+  async getServerSideProps({ req }) {
     const { data } = await makeRequest({
       url: GET_API_COURSES,
       method: 'GET',
-      headers: integrateAuthorizationHeader(accessToken),
+      headers: { Cookie: req.headers.cookie },
     });
 
     const { courses } = data;

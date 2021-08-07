@@ -1,10 +1,10 @@
-// import { withApiAuthRequired } from '@auth0/nextjs-auth0';
+import { withApiAuthRequired } from '@auth0/nextjs-auth0';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { HTTP_METHODS } from '../../../constants/enums';
 import { getCourses } from '../../../dal/courseRepository';
 import dbConnect from '../../../database/dbConnect';
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = withApiAuthRequired(async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
 
   await dbConnect();
@@ -22,5 +22,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(400).json({ success: false });
       break;
   }
-};
+});
+
 export default handler;

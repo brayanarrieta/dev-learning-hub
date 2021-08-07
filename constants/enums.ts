@@ -10,3 +10,9 @@ export enum HTTP_STATUS_CODES {
 export enum HTTP_METHODS {
     GET = 'GET'
 }
+
+export enum CoursePlatform {
+    UDEMY = 'Udemy',
+    COURSERA = 'Coursera',
+    YOUTUBE = 'YouTube',
+}

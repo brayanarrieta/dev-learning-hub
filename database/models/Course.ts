@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { CoursePlatform } from '../../constants/enums';
 
 const Course = new mongoose.Schema({
   title: {
@@ -10,6 +11,13 @@ const Course = new mongoose.Schema({
   isExpired: {
     type: Boolean,
     default: false,
+  },
+  description: {
+    type: String,
+  },
+  platform: {
+    type: String,
+    enum: Object.values(CoursePlatform),
   },
 },
 {
