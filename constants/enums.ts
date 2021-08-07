@@ -1,0 +1,12 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-shadow */
+export enum HTTP_STATUS_CODES {
+    INTERNAL_SERVER_ERROR = 500,
+    UNPROCESSABLE_ENTITY= 422,
+    OK = 200,
+    NOT_FOUND = 404,
+}
+
+export enum HTTP_METHODS {
+    GET = 'GET'
+}

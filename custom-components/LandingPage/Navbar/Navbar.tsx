@@ -78,11 +78,11 @@ const Navbar = (props: NavbarProps) => {
             fontSize="sm"
             fontWeight={600}
             color="white"
-            bg="pink.400"
+            bg="teal.400"
             as="a"
             href={isLoggedIn ? DASHBOARD_URL : SIGN_IN_URL}
             _hover={{
-              bg: 'pink.300',
+              bg: 'teal.500',
             }}
           >
             { isLoggedIn ? 'Go to Dashboard' : 'Sign In' }
