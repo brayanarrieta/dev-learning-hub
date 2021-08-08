@@ -14,6 +14,7 @@ import {
   HamburgerIcon,
   CloseIcon,
 } from '@chakra-ui/icons';
+import Router from 'next/router';
 import DesktopNavbar from './DesktopNavbar';
 import MobileNavbar from './MobileNavbar';
 import { DASHBOARD_URL, SIGN_IN_URL } from '../../../constants/pageURLs';
@@ -79,8 +80,7 @@ const Navbar = (props: NavbarProps) => {
             fontWeight={600}
             color="white"
             bg="teal.400"
-            as="a"
-            href={isLoggedIn ? DASHBOARD_URL : SIGN_IN_URL}
+            onClick={() => Router.push(isLoggedIn ? DASHBOARD_URL : SIGN_IN_URL)}
             _hover={{
               bg: 'teal.500',
             }}

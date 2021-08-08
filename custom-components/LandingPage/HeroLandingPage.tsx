@@ -10,6 +10,7 @@ import {
   useColorModeValue,
   createIcon,
 } from '@chakra-ui/react';
+import Router from 'next/router';
 import { APPLICATION_NAME } from '../../constants/config';
 import { DASHBOARD_URL, SIGN_IN_URL } from '../../constants/pageURLs';
 
@@ -74,8 +75,7 @@ const HeroLandingPage = (props: HeroLandingPageProps) => {
               _hover={{
                 bg: 'green.500',
               }}
-              as="a"
-              href={isLoggedIn ? DASHBOARD_URL : SIGN_IN_URL}
+              onClick={() => Router.push(isLoggedIn ? DASHBOARD_URL : SIGN_IN_URL)}
             >
               Start to share and learn
             </Button>
