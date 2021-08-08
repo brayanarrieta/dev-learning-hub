@@ -4,4 +4,4 @@ export const LOGOUT_URL = '/api/auth/logout';
 export const PROFILE_URL = '/api/auth/me';
 
 export const DASHBOARD_URL = '/dashboard';
-export const COURSES_URL = '/courses';
+export const COURSES_PAGE_URL = '/courses';

@@ -2,10 +2,10 @@ import React, { ReactText } from 'react';
 import {
   Flex,
   Icon,
-  Link,
   FlexProps,
 } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
+import Router from 'next/router';
 
 interface NavItemProps extends FlexProps {
     icon: IconType;
@@ -13,34 +13,35 @@ interface NavItemProps extends FlexProps {
     link: string;
   }
 
-const NavItem = ({ icon, children, link, ...rest }: NavItemProps) => (
-  <Link href={link} style={{ textDecoration: 'none' }}>
-    <Flex
-      align="center"
-      p="4"
-      mx="4"
-      borderRadius="lg"
-      role="group"
-      cursor="pointer"
-      _hover={{
-        bg: 'teal.400',
+const NavItem = ({
+  icon, children, link, ...rest
+}: NavItemProps) => (
+  <Flex
+    align="center"
+    p="4"
+    mx="4"
+    borderRadius="lg"
+    role="group"
+    cursor="pointer"
+    _hover={{
+      bg: 'teal.400',
+      color: 'white',
+    }}
+    {...rest}
+    onClick={() => Router.push(link)}
+  >
+    {icon && (
+    <Icon
+      mr="4"
+      fontSize="16"
+      _groupHover={{
         color: 'white',
       }}
-      {...rest}
-    >
-      {icon && (
-        <Icon
-          mr="4"
-          fontSize="16"
-          _groupHover={{
-            color: 'white',
-          }}
-          as={icon}
-        />
-      )}
-      {children}
-    </Flex>
-  </Link>
+      as={icon}
+    />
+    )}
+    {children}
+  </Flex>
 );
 
 export default NavItem;
