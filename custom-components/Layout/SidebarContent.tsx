@@ -7,9 +7,9 @@ import {
   Text,
   BoxProps,
 } from '@chakra-ui/react';
-import LinkItems from './linkItems';
+import LINK_ITEMS from './linkItems';
 import NavItem from './NavItem';
-import { APPLICATION_NAME } from '../../constants/config';
+import { APPLICATION_NAME, BASE_URL } from '../../constants/config';
 
 interface SidebarProps extends BoxProps {
     onClose: () => void;
@@ -32,8 +32,8 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => (
       </Text>
       <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
     </Flex>
-    {LinkItems.map((linkItem) => (
-      <NavItem key={linkItem.name} icon={linkItem.icon} link={linkItem.link}>
+    {LINK_ITEMS.map((linkItem) => (
+      <NavItem key={linkItem.name} icon={linkItem.icon} link={`${BASE_URL}${linkItem.link}`}>
         {linkItem.name}
       </NavItem>
     ))}

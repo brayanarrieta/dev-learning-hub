@@ -13,3 +13,10 @@ export interface Course {
     platform: CoursePlatform;
     isExpired?: boolean;
 }
+
+export interface Technology {
+    _id?: number;
+    name: string;
+    description: string;
+    slug: string;
+}

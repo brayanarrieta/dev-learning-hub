@@ -5,3 +5,4 @@ export const PROFILE_URL = '/api/auth/me';
 
 export const DASHBOARD_URL = '/dashboard';
 export const COURSES_PAGE_URL = '/courses';
+export const INTERVIEW_QUESTIONS_PAGE_URL = '/interview-questions';
