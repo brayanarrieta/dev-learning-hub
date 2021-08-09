@@ -9,6 +9,8 @@ const Technology = new mongoose.Schema({
   },
   slug: {
     type: String,
+    index: true,
+    unique: true,
   },
 },
 {

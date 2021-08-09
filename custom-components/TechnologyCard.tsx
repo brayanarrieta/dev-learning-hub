@@ -7,7 +7,9 @@ import {
   Button,
 } from '@chakra-ui/react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
+import Router from 'next/router';
 import { Technology } from '../types';
+import { getTechnologyInterviewQuestionsURL } from '../constants/pageURLs';
 
 interface TechnologyCardProps {
     technology: Technology,
@@ -29,15 +31,14 @@ const TechnologyCard = ({
 
     <Text mt={2} textAlign="justify" noOfLines={3} fontSize="md">{technology.description}</Text>
 
-    <Flex mt={2} justifyContent="flex-end">
+    <Flex mt={4} justifyContent="flex-end">
       <Button
         fontSize="sm"
         fontWeight={600}
         color="white"
         bg="teal.400"
         as="a"
-        href="mock"
-        target="_blank"
+        onClick={() => Router.push(getTechnologyInterviewQuestionsURL(technology.slug))}
         _hover={{
           bg: 'teal.500',
         }}
