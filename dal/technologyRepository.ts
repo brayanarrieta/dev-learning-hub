@@ -5,3 +5,15 @@ export const bulkInsertTechnologies = async (
 ) => Technology.insertMany(technologies);
 
 export const truncateTechnologies = async () => Technology.deleteMany();
+
+export const getTechnologiesCountDal = async () => {
+  const count = await Technology.find().count();
+  return count;
+};
+
+export const getTechnologiesWithPaginationDal = async (currentPage: number, pageSize: number) => {
+  const offset = (currentPage - 1) * pageSize;
+  const technologies = await Technology.find().skip(offset)
+    .limit(pageSize);
+  return technologies;
+};

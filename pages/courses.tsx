@@ -13,13 +13,15 @@ import { GET_API_COURSES } from '../constants/apiURLs';
 import { convertToNumber } from '../helpers/convertTypes';
 import Paginator from '../components/Paginator';
 import { COURSES_PAGE_URL } from '../constants/pageURLs';
-import { COURSES_PAGE_DEFAULT_INITIAL_PAGE, GET_COURSES_WITH_PAGINATION_PAGE_SIZE } from '../constants/config';
+import { PAGINATION_DEFAULT_INITIAL_PAGE, GET_COURSES_WITH_PAGINATION_PAGE_SIZE } from '../constants/config';
 
 interface CoursesProps {
     courses: Course[],
     currentPage: number,
     coursesCount: number,
 }
+
+// TODO: Add code in the case that there aren't courses
 
 const Courses = (props: CoursesProps) => {
   const { courses, currentPage, coursesCount } = props;
@@ -50,7 +52,7 @@ const Courses = (props: CoursesProps) => {
 };
 
 export const getServerSideProps = withPageAuthRequired({
-  async getServerSideProps({ req, query: { page = COURSES_PAGE_DEFAULT_INITIAL_PAGE } }) {
+  async getServerSideProps({ req, query: { page = PAGINATION_DEFAULT_INITIAL_PAGE } }) {
     const { data } = await makeRequest({
       url: GET_API_COURSES,
       method: 'GET',

@@ -6,4 +6,6 @@ export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:30
 
 export const GET_COURSES_WITH_PAGINATION_PAGE_SIZE = 4;
 
-export const COURSES_PAGE_DEFAULT_INITIAL_PAGE = 1;
+export const GET_TECHNOLOGIES_WITH_PAGINATION_PAGE_SIZE = 6;
+
+export const PAGINATION_DEFAULT_INITIAL_PAGE = 1;
