@@ -1,64 +1,69 @@
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
-import { Heading, SimpleGrid, Stack } from '@chakra-ui/react';
+import {
+  Flex, Heading, SimpleGrid, Stack,
+} from '@chakra-ui/react';
 import React from 'react';
+import Paginator from '../../components/Paginator';
+import { GET_API_TECHNOLOGIES } from '../../constants/apiURLs';
+import { GET_TECHNOLOGIES_WITH_PAGINATION_PAGE_SIZE, PAGINATION_DEFAULT_INITIAL_PAGE } from '../../constants/config';
+import { INTERVIEW_QUESTIONS_PAGE_URL } from '../../constants/pageURLs';
 import SidebarWithHeader from '../../custom-components/Layout/SidebarWithHeader';
 import TechnologyCard from '../../custom-components/TechnologyCard';
+import { convertToNumber } from '../../helpers/convertTypes';
+import { makeRequest } from '../../helpers/makeRequest';
 import { Technology } from '../../types';
 
-const MOCKED_DATA: Technology[] = [
-  {
-    _id: 1,
-    name: 'React',
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley',
-    slug: 'react',
-  },
-  {
-    _id: 2,
-    name: 'React 2',
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley',
-    slug: 'react',
-  },
-  {
-    _id: 3,
-    name: 'React 3',
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley',
-    slug: 'react',
-  },
-  {
-    _id: 4,
-    name: 'React 4',
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley',
-    slug: 'react',
-  },
-  {
-    _id: 5,
-    name: 'React 5',
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley',
-    slug: 'react',
-  },
+interface InterviewQuestionsProps {
+  technologies: Technology[],
+  technologiesCount: number,
+  currentPage: number
+}
 
-];
+const InterviewQuestions = (props: InterviewQuestionsProps) => {
+  const { technologies, technologiesCount, currentPage } = props;
 
-const InterviewQuestions = () => (
-  <SidebarWithHeader>
+  return (
+    <SidebarWithHeader>
 
-    <Stack spacing={4}>
-      <Heading>Interview Questions Technologies</Heading>
+      <Stack spacing={4}>
+        <Heading>Interview Questions Technologies</Heading>
 
-      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={2}>
-        {MOCKED_DATA.map((technology) => (
-          <TechnologyCard
-            key={technology._id}
-            technology={technology}
+        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={2}>
+          {technologies.map((technology: Technology) => (
+            <TechnologyCard
+              key={technology._id}
+              technology={technology}
+            />
+          ))}
+        </SimpleGrid>
+
+        <Flex justifyContent="flex-end">
+          <Paginator
+            currentPage={currentPage}
+            pageSize={GET_TECHNOLOGIES_WITH_PAGINATION_PAGE_SIZE}
+            basePageURL={INTERVIEW_QUESTIONS_PAGE_URL}
+            totalRows={technologiesCount}
           />
-        ))}
-      </SimpleGrid>
+        </Flex>
 
-    </Stack>
+      </Stack>
 
-  </SidebarWithHeader>
-);
+    </SidebarWithHeader>
+  );
+};
 
-export const getServerSideProps = withPageAuthRequired();
+export const getServerSideProps = withPageAuthRequired({
+  async getServerSideProps({ req, query: { page = PAGINATION_DEFAULT_INITIAL_PAGE } }) {
+    const { data } = await makeRequest({
+      url: GET_API_TECHNOLOGIES,
+      method: 'GET',
+      headers: { Cookie: req.headers.cookie },
+      params: { page },
+    });
+
+    const { technologies, technologiesCount } = data;
+    return { props: { technologies, currentPage: convertToNumber(page), technologiesCount } };
+  },
+});
 
 export default InterviewQuestions;

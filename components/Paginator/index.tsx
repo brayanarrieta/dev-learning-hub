@@ -24,6 +24,9 @@ const Paginator = (props: PaginatorProps) => {
   const {
     currentPage, pageSize, totalRows, basePageURL,
   } = props;
+
+  if (totalRows < pageSize) return null;
+
   const minPageNumberLimit = 1;
   const maxPageNumberLimit = ceilNumber(totalRows / pageSize);
 
