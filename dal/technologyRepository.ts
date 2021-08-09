@@ -7,7 +7,7 @@ export const bulkInsertTechnologies = async (
 export const truncateTechnologies = async () => Technology.deleteMany();
 
 export const getTechnologiesCountDal = async () => {
-  const count = await Technology.find().count();
+  const count = await Technology.find().countDocuments();
   return count;
 };
 
@@ -17,3 +17,5 @@ export const getTechnologiesWithPaginationDal = async (currentPage: number, page
     .limit(pageSize);
   return technologies;
 };
+
+export const getTechnologyBySlugDal = async (slug: string) => Technology.findOne({ slug });

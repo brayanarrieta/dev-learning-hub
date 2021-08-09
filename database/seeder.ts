@@ -1,8 +1,11 @@
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import { bulkInsertCourses, truncateCourses } from '../dal/courseRepository';
+import { bulkInterviewQuestions, truncateInterviewQuestions } from '../dal/interviewQuestionRepository';
 import { bulkInsertTechnologies, truncateTechnologies } from '../dal/technologyRepository';
+import { Technology } from '../types';
 import COURSES_SEEDS from './seeds/coursesSeeds';
+import INTERVIEW_QUESTIONS_SEEDS from './seeds/interviewQuestions';
 import TECHNOLOGIES_SEEDS from './seeds/technologiesSeeds';
 
 dotenv.config({
@@ -12,11 +15,23 @@ dotenv.config({
 const truncate = async () => {
   await truncateCourses();
   await truncateTechnologies();
+  await truncateInterviewQuestions();
 };
 
 const importData = async () => {
   await bulkInsertCourses(COURSES_SEEDS);
-  await bulkInsertTechnologies(TECHNOLOGIES_SEEDS);
+  const technologies = await bulkInsertTechnologies(TECHNOLOGIES_SEEDS);
+  await Promise.all(
+    technologies.map(async (
+      technology: Technology,
+    ) => {
+      const questions = (INTERVIEW_QUESTIONS_SEEDS[technology.name] || []).map(
+        (i) => ({ ...i, technologyId: technology._id }),
+      );
+
+      return bulkInterviewQuestions(questions);
+    }),
+  );
 };
 
 const seeder = async () => {

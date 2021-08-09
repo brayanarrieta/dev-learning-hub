@@ -20,3 +20,9 @@ export interface Technology {
     description: string;
     slug: string;
 }
+
+export interface InterviewQuestion {
+    question: string,
+    answer: string,
+    technologyID?: number,
+}

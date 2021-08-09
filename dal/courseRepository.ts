@@ -1,7 +1,7 @@
 import Course from '../database/models/Course';
 
 export const getExpiredCoursesCount = async () => {
-  const count = await Course.find({ isExpired: false }).count();
+  const count = await Course.find({ isExpired: false }).countDocuments();
   return count;
 };
 

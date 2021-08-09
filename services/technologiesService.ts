@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { PAGINATION_DEFAULT_INITIAL_PAGE, GET_TECHNOLOGIES_WITH_PAGINATION_PAGE_SIZE } from '../constants/config';
-import { getTechnologiesCountDal, getTechnologiesWithPaginationDal } from '../dal/technologyRepository';
+import { getTechnologiesCountDal, getTechnologiesWithPaginationDal, getTechnologyBySlugDal } from '../dal/technologyRepository';
 import { convertToNumber } from '../helpers/convertTypes';
 
 export const getTechnologiesWithPagination = async (currentPage: any) => {
@@ -16,3 +16,5 @@ export const getTechnologiesWithPagination = async (currentPage: any) => {
     technologies,
   };
 };
+
+export const getTechnologyBySlug = async (slug: string) => getTechnologyBySlugDal(slug);
