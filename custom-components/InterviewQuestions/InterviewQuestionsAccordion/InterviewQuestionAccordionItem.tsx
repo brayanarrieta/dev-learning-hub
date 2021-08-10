@@ -7,6 +7,7 @@ import {
   AccordionPanel,
 } from '@chakra-ui/react';
 import { InterviewQuestion } from '../../../types';
+import MarkdownContent from '../../../components/MarkdownContent';
 
 interface InterviewQuestionAccordionItemProps {
     interviewQuestion: InterviewQuestion,
@@ -25,7 +26,7 @@ const InterviewQuestionAccordionItem = ({
       </AccordionButton>
     </h2>
     <AccordionPanel pb={4}>
-      {interviewQuestion.answer}
+      <MarkdownContent content={interviewQuestion.answer} />
     </AccordionPanel>
   </AccordionItem>
 
