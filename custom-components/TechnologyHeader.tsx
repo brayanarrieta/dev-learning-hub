@@ -18,6 +18,7 @@ const TechnologyHeader = ({
     as={Box}
     textAlign="center"
     spacing={{ base: 8, md: 8 }}
+    alignItems="center"
   >
     <Heading
       fontWeight={600}

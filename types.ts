@@ -6,7 +6,7 @@ export interface NavItem {
 export type CoursePlatform = 'Udemy' | 'Coursera' | 'YouTube';
 
 export interface Course {
-    _id?: number;
+    _id?: string;
     title: string;
     description: string;
     link: string;
@@ -15,13 +15,14 @@ export interface Course {
 }
 
 export interface Technology {
-    _id?: number;
+    _id?: string;
     name: string;
     description: string;
     slug: string;
 }
 
 export interface InterviewQuestion {
+    _id?: string;
     question: string,
     answer: string,
     technologyID?: number,

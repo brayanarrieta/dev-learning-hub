@@ -1,33 +1,57 @@
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
+import { Flex, Stack } from '@chakra-ui/react';
 import React from 'react';
+import Paginator from '../../../components/Paginator';
 import { getAPIInterviewQuestionsByTechnologyId, getAPITechnologyBySlugURL } from '../../../constants/apiURLs';
+import { GET_INTERVIEW_QUESTIONS_WITH_PAGINATION_PAGE_SIZE, PAGINATION_DEFAULT_INITIAL_PAGE } from '../../../constants/config';
+import { getTechnologyInterviewQuestionsURL } from '../../../constants/pageURLs';
+import InterviewQuestionsAccordion from '../../../custom-components/InterviewQuestions';
 import SidebarWithHeader from '../../../custom-components/Layout/SidebarWithHeader';
 import TechnologyHeader from '../../../custom-components/TechnologyHeader';
+import { convertToNumber } from '../../../helpers/convertTypes';
 import { makeRequest } from '../../../helpers/makeRequest';
 import { InterviewQuestion, Technology } from '../../../types';
 
 interface TechnologyQuestionsProps {
+  currentPage: number;
   technology: Technology;
   interviewQuestions: InterviewQuestion[];
   interviewQuestionsCount: number;
 }
 const TechnologyQuestions = (props: TechnologyQuestionsProps) => {
-  // eslint-disable-next-line no-unused-vars
-  const { technology, interviewQuestions, interviewQuestionsCount } = props;
+  const {
+    technology, interviewQuestions, interviewQuestionsCount, currentPage,
+  } = props;
+
   return (
     <SidebarWithHeader>
-      <TechnologyHeader
-        technologyName={technology.name}
-        technologyDescription={technology.description}
-      />
 
-      {interviewQuestionsCount}
+      <Stack spacing={4}>
+
+        <TechnologyHeader
+          technologyName={technology.name}
+          technologyDescription={technology.description}
+        />
+
+        <InterviewQuestionsAccordion interviewQuestions={interviewQuestions} />
+
+        <Flex justifyContent="flex-end">
+          <Paginator
+            currentPage={currentPage}
+            pageSize={GET_INTERVIEW_QUESTIONS_WITH_PAGINATION_PAGE_SIZE}
+            basePageURL={getTechnologyInterviewQuestionsURL(technology.slug)}
+            totalRows={interviewQuestionsCount}
+          />
+        </Flex>
+
+      </Stack>
+
     </SidebarWithHeader>
   );
 };
 
 export const getServerSideProps = withPageAuthRequired({
-  async getServerSideProps({ req, query: { slug, page } }) {
+  async getServerSideProps({ req, query: { slug, page = PAGINATION_DEFAULT_INITIAL_PAGE } }) {
     const { data: { technology } } = await makeRequest({
       url: getAPITechnologyBySlugURL(slug),
       method: 'GET',
@@ -41,7 +65,15 @@ export const getServerSideProps = withPageAuthRequired({
       params: { page },
     });
 
-    return { props: { technology, interviewQuestions, interviewQuestionsCount } };
+    return {
+      props: {
+        technology,
+        interviewQuestions,
+        interviewQuestionsCount,
+        currentPage: convertToNumber(page),
+
+      },
+    };
   },
 });
 
