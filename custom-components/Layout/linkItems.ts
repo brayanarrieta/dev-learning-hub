@@ -17,7 +17,7 @@ interface LinkItem {
 const LINK_ITEMS: Array<LinkItem> = [
   { name: 'Interview Questions', icon: FiBookOpen, link: INTERVIEW_QUESTIONS_PAGE_URL },
   { name: 'Interview Quiz', icon: FiBook, link: '#' },
-  { name: 'CheatSheets Collection', icon: FiStar, link: '#' },
+  { name: 'Code Snippet Collection', icon: FiStar, link: '#' },
   { name: 'Free Online Courses', icon: FiAward, link: COURSES_PAGE_URL },
   { name: 'Community Requests', icon: FiUsers, link: '#' },
 ];

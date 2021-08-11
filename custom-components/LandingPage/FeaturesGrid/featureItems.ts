@@ -21,8 +21,8 @@ const FEATURE_ITEMS: Array<FeatureItem> = [
     icon: FcCollaboration,
   },
   {
-    title: 'CheatSheets Collection',
-    text: 'A collection of developers cheatsheets of different technologies.',
+    title: 'Code Snippet Collection',
+    text: 'A collection of developers code snippets of different technologies.',
     icon: FcFlashOn,
   },
   {
