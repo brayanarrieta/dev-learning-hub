@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { CoursePlatform } from '../../constants/enums';
 
-const Course = new mongoose.Schema({
+const CourseModel = new mongoose.Schema({
   title: {
     type: String,
   },
@@ -24,4 +24,4 @@ const Course = new mongoose.Schema({
   timestamps: true,
 });
 
-export default mongoose.models.Course || mongoose.model('Course', Course);
+export const Course = mongoose.models.Course || mongoose.model('Course', CourseModel);

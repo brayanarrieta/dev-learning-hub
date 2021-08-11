@@ -1,4 +1,4 @@
-import Technology from '../database/models/Technology';
+import { Technology } from '../database/models';
 
 export const bulkInsertTechnologies = async (
   technologies: any,

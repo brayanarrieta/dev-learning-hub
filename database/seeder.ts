@@ -41,7 +41,7 @@ const importData = async () => {
       technology: Technology,
     ) => {
       const codeSnippets = (CODE_SNIPPETS_SEEDS[technology.name] || []).map(
-        (i) => ({ ...i, technologyId: technology._id }),
+        (i) => ({ ...i, technology: technology._id }),
       );
 
       return bulkInsertCodeSnippetsDal(codeSnippets);

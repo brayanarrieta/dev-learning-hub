@@ -1,4 +1,4 @@
-import InterviewQuestion from '../database/models/InterviewQuestion';
+import { InterviewQuestion } from '../database/models';
 
 export const bulkInterviewQuestions = async (
   interviewQuestions: any,

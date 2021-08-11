@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
-const CodeSnippet = new mongoose.Schema({
+const CodeSnippetModel = new mongoose.Schema({
   title: {
     type: String,
   },
@@ -12,7 +12,7 @@ const CodeSnippet = new mongoose.Schema({
   content: {
     type: String,
   },
-  technologyId: {
+  technology: {
     type: Schema.Types.ObjectId,
     ref: 'Technology',
   },
@@ -21,4 +21,4 @@ const CodeSnippet = new mongoose.Schema({
   timestamps: true,
 });
 
-export default mongoose.models.CodeSnippet || mongoose.model('CodeSnippet', CodeSnippet);
+export const CodeSnippet = mongoose.models.CodeSnippet || mongoose.model('CodeSnippet', CodeSnippetModel);

@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
-const InterviewQuestion = new mongoose.Schema({
+const InterviewQuestionModel = new mongoose.Schema({
   question: {
     type: String,
   },
@@ -18,4 +18,4 @@ const InterviewQuestion = new mongoose.Schema({
   timestamps: true,
 });
 
-export default mongoose.models.InterviewQuestion || mongoose.model('InterviewQuestion', InterviewQuestion);
+export const InterviewQuestion = mongoose.models.InterviewQuestion || mongoose.model('InterviewQuestion', InterviewQuestionModel);

@@ -1,4 +1,4 @@
-import CodeSnippet from '../database/models/CodeSnippet';
+import { CodeSnippet } from '../database/models';
 
 export const bulkInsertCodeSnippetsDal = async (
   codeSnippets: any,
@@ -13,7 +13,7 @@ export const getCodeSnippetsCountDal = async () => {
 
 export const getCodeSnippetsWithPaginationDal = async (currentPage: number, pageSize: number) => {
   const offset = (currentPage - 1) * pageSize;
-  const codeSnippets = await CodeSnippet.find().skip(offset)
+  const codeSnippets = await CodeSnippet.find().populate('technology', 'name').skip(offset)
     .limit(pageSize);
   return codeSnippets;
 };

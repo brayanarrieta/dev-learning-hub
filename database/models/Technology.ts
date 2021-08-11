@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const Technology = new mongoose.Schema({
+const TechnologyModel = new mongoose.Schema({
   name: {
     type: String,
   },
@@ -17,4 +17,4 @@ const Technology = new mongoose.Schema({
   timestamps: true,
 });
 
-export default mongoose.models.Technology || mongoose.model('Technology', Technology);
+export const Technology = mongoose.models.Technology || mongoose.model('Technology', TechnologyModel);
