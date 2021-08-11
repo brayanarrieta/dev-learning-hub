@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import { truncateCodeSnippetsDal } from '../dal/codeSnippetRepository';
+import { bulkInsertCodeSnippetsDal, truncateCodeSnippetsDal } from '../dal/codeSnippetRepository';
 import { bulkInsertCourses, truncateCourses } from '../dal/courseRepository';
 import { bulkInterviewQuestions, truncateInterviewQuestions } from '../dal/interviewQuestionRepository';
 import { bulkInsertTechnologies, truncateTechnologies } from '../dal/technologyRepository';
@@ -44,7 +44,7 @@ const importData = async () => {
         (i) => ({ ...i, technologyId: technology._id }),
       );
 
-      return bulkInterviewQuestions(codeSnippets);
+      return bulkInsertCodeSnippetsDal(codeSnippets);
     }),
   );
 };
