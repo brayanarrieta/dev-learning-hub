@@ -27,3 +27,11 @@ export interface InterviewQuestion {
     answer: string,
     technologyID?: number,
 }
+
+export interface CodeSnippet {
+    _id?: string;
+    title: string;
+    description: string;
+    content: string;
+    technologyID?: number,
+}

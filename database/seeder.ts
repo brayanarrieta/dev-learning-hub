@@ -1,9 +1,11 @@
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import { truncateCodeSnippetsDal } from '../dal/codeSnippetRepository';
 import { bulkInsertCourses, truncateCourses } from '../dal/courseRepository';
 import { bulkInterviewQuestions, truncateInterviewQuestions } from '../dal/interviewQuestionRepository';
 import { bulkInsertTechnologies, truncateTechnologies } from '../dal/technologyRepository';
 import { Technology } from '../types';
+import CODE_SNIPPETS_SEEDS from './seeds/codeSnippetsSeeds';
 import COURSES_SEEDS from './seeds/coursesSeeds';
 import INTERVIEW_QUESTIONS_SEEDS from './seeds/interviewQuestions';
 import TECHNOLOGIES_SEEDS from './seeds/technologiesSeeds';
@@ -16,6 +18,7 @@ const truncate = async () => {
   await truncateCourses();
   await truncateTechnologies();
   await truncateInterviewQuestions();
+  await truncateCodeSnippetsDal();
 };
 
 const importData = async () => {
@@ -30,6 +33,18 @@ const importData = async () => {
       );
 
       return bulkInterviewQuestions(questions);
+    }),
+  );
+
+  await Promise.all(
+    technologies.map(async (
+      technology: Technology,
+    ) => {
+      const codeSnippets = (CODE_SNIPPETS_SEEDS[technology.name] || []).map(
+        (i) => ({ ...i, technologyId: technology._id }),
+      );
+
+      return bulkInterviewQuestions(codeSnippets);
     }),
   );
 };
