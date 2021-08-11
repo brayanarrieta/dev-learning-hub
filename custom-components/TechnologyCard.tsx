@@ -9,14 +9,15 @@ import {
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import Router from 'next/router';
 import { Technology } from '../types';
-import { getTechnologyInterviewQuestionsURL } from '../constants/pageURLs';
 
 interface TechnologyCardProps {
     technology: Technology,
+    buttonLink: string;
+    buttonText: string;
 }
 
 const TechnologyCard = ({
-  technology,
+  technology, buttonLink, buttonText
 }: TechnologyCardProps) => (
   <Box
     p={4}
@@ -38,13 +39,13 @@ const TechnologyCard = ({
         color="white"
         bg="teal.400"
         as="a"
-        onClick={() => Router.push(getTechnologyInterviewQuestionsURL(technology.slug))}
+        onClick={() => Router.push(buttonLink)}
         _hover={{
           bg: 'teal.500',
         }}
         rightIcon={<ArrowForwardIcon />}
       >
-        {`Go to the ${technology.name} questions`}
+        {buttonText}
       </Button>
     </Flex>
   </Box>

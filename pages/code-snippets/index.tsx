@@ -6,35 +6,35 @@ import React from 'react';
 import Paginator from '../../components/Paginator';
 import { GET_API_TECHNOLOGIES } from '../../constants/apiURLs';
 import { GET_TECHNOLOGIES_WITH_PAGINATION_PAGE_SIZE, PAGINATION_DEFAULT_INITIAL_PAGE } from '../../constants/config';
-import { getTechnologyInterviewQuestionsURL, INTERVIEW_QUESTIONS_PAGE_URL } from '../../constants/pageURLs';
+import { CODE_SNIPPETS_PAGE_URL, getTechnologyCodeSnippetsURL } from '../../constants/pageURLs';
+import CodeSnippetCard from '../../custom-components/CodeSnippetCard';
 import SidebarWithHeader from '../../custom-components/Layout/SidebarWithHeader';
-import TechnologyCard from '../../custom-components/TechnologyCard';
 import { convertToNumber } from '../../helpers/convertTypes';
 import { makeRequest } from '../../helpers/makeRequest';
 import { Technology } from '../../types';
 
-interface InterviewQuestionsProps {
+interface CodeSnippetsProps {
   technologies: Technology[],
   technologiesCount: number,
   currentPage: number
 }
 
-const InterviewQuestions = (props: InterviewQuestionsProps) => {
+const CodeSnippets = (props: CodeSnippetsProps) => {
   const { technologies, technologiesCount, currentPage } = props;
 
   return (
     <SidebarWithHeader>
 
       <Stack spacing={4}>
-        <Heading>Interview Questions Technologies</Heading>
+        <Heading>Code Snippets Technologies</Heading>
 
-        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={2}>
+        <SimpleGrid columns={{ base: 1, md: 3, lg: 4 }} spacing={2}>
           {technologies.map((technology: Technology) => (
-            <TechnologyCard
+            <CodeSnippetCard
               key={technology._id}
               technology={technology}
-              buttonText={`Go to the ${technology.name} questions`}
-              buttonLink={getTechnologyInterviewQuestionsURL(technology.slug)}
+              buttonText="Go to the snippets"
+              buttonLink={getTechnologyCodeSnippetsURL(technology.slug)}
             />
           ))}
         </SimpleGrid>
@@ -43,7 +43,7 @@ const InterviewQuestions = (props: InterviewQuestionsProps) => {
           <Paginator
             currentPage={currentPage}
             pageSize={GET_TECHNOLOGIES_WITH_PAGINATION_PAGE_SIZE}
-            basePageURL={INTERVIEW_QUESTIONS_PAGE_URL}
+            basePageURL={CODE_SNIPPETS_PAGE_URL}
             totalRows={technologiesCount}
           />
         </Flex>
@@ -68,4 +68,4 @@ export const getServerSideProps = withPageAuthRequired({
   },
 });
 
-export default InterviewQuestions;
+export default CodeSnippets;
