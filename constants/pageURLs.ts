@@ -10,4 +10,4 @@ export const CODE_SNIPPETS_PAGE_URL = '/code-snippets';
 
 export const getTechnologyInterviewQuestionsURL = (slug: string) => `${INTERVIEW_QUESTIONS_PAGE_URL}/technology/${slug}`;
 
-export const getTechnologyCodeSnippetsURL = (slug: string) => `${CODE_SNIPPETS_PAGE_URL}/technology/${slug}`;
+export const getCodeSnippetURLById = (id: any) => `${CODE_SNIPPETS_PAGE_URL}/${id}`;

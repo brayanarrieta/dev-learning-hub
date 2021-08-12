@@ -3,51 +3,74 @@ import {
   Flex,
   Text,
   useColorModeValue,
-  Box,
   Button,
+  Box,
+  useBreakpointValue,
 } from '@chakra-ui/react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import Router from 'next/router';
-import { Technology } from '../types';
+import { CodeSnippet, Technology } from '../types';
+import { getCodeSnippetURLById } from '../constants/pageURLs';
+
+interface CodeSnippetComposed extends Omit<CodeSnippet, 'technology'> {
+  technology: Technology
+}
 
 interface CodeSnippetCardProps {
-    technology: Technology,
-    buttonLink: string;
-    buttonText: string;
+    codeSnippet: CodeSnippetComposed,
 }
 
 const CodeSnippetCard = ({
-  technology, buttonLink, buttonText,
-}: CodeSnippetCardProps) => (
-  <Flex
-    py={6}
-    bg={useColorModeValue('white', 'gray.800')}
-    borderRadius="lg"
-    shadow="lg"
-    w="full"
-    borderWidth={1}
-    borderColor="teal.400"
-    flexDirection="column"
-    alignItems="center"
-  >
-    <Text fontSize={{ base: 'xl', md: '2xl' }} fontWeight="semibold">{technology.name}</Text>
+  codeSnippet,
+}: CodeSnippetCardProps) => {
+  const shouldTruncateCourseTitle = useBreakpointValue({ base: false, md: true });
 
-    <Button
-      mt={4}
-      fontSize="sm"
-      fontWeight={600}
-      color="white"
-      bg="teal.400"
-      as="a"
-      onClick={() => Router.push(buttonLink)}
-      _hover={{
-        bg: 'teal.500',
-      }}
-      rightIcon={<ArrowForwardIcon />}
+  const { technology } = codeSnippet;
+  return (
+    <Box
+      p={4}
+      bg={useColorModeValue('white', 'gray.800')}
+      borderRadius="lg"
+      shadow="lg"
+      w="full"
+      borderWidth={1}
+      borderColor="teal.400"
     >
-      {buttonText}
-    </Button>
-  </Flex>
-);
+      <Flex justifyContent="space-between" flexDirection={{ base: 'column', md: 'row' }}>
+        <Text fontSize={{ base: 'md', md: 'lg' }} fontWeight="semibold" isTruncated={shouldTruncateCourseTitle}>{codeSnippet.title}</Text>
+        <Text
+          fontSize="sm"
+          fontWeight={500}
+          bg={{ base: 'white', md: 'green.100' }}
+          p={{ base: 0, md: 2 }}
+          rounded="lg"
+          color={{ base: 'teal.500', md: 'black' }}
+        >
+          {technology.name}
+        </Text>
+      </Flex>
+
+      <Text mt={2} textAlign="justify" noOfLines={3}>{codeSnippet.description}</Text>
+
+      <Flex mt={2} justifyContent="flex-end">
+        <Button
+          fontSize="sm"
+          fontWeight={600}
+          color="white"
+          bg="teal.400"
+          as="a"
+          onClick={() => Router.push(getCodeSnippetURLById(codeSnippet._id))}
+          _hover={{
+            bg: 'teal.500',
+          }}
+          rightIcon={<ArrowForwardIcon />}
+        >
+          More Details
+        </Button>
+      </Flex>
+    </Box>
+
+  );
+};
 
 export default CodeSnippetCard;

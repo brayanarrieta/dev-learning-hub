@@ -7,3 +7,5 @@ export const getAPITechnologyBySlugURL = (slug: any) => `/api/technologies/slug/
 export const getAPIInterviewQuestionsByTechnologyId = (
   technologyId: any,
 ) => `/api/interview-questions/technology/${technologyId}`;
+
+export const GET_API_CODE_SNIPPETS = '/api/code-snippets';

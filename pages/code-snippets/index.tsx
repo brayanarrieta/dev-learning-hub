@@ -4,37 +4,35 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import Paginator from '../../components/Paginator';
-import { GET_API_TECHNOLOGIES } from '../../constants/apiURLs';
-import { GET_TECHNOLOGIES_WITH_PAGINATION_PAGE_SIZE, PAGINATION_DEFAULT_INITIAL_PAGE } from '../../constants/config';
-import { CODE_SNIPPETS_PAGE_URL, getTechnologyCodeSnippetsURL } from '../../constants/pageURLs';
+import { GET_API_CODE_SNIPPETS } from '../../constants/apiURLs';
+import { GET_CODE_SNIPPETS_WITH_PAGINATION_PAGE_SIZE, PAGINATION_DEFAULT_INITIAL_PAGE } from '../../constants/config';
+import { CODE_SNIPPETS_PAGE_URL } from '../../constants/pageURLs';
 import CodeSnippetCard from '../../custom-components/CodeSnippetCard';
 import SidebarWithHeader from '../../custom-components/Layout/SidebarWithHeader';
 import { convertToNumber } from '../../helpers/convertTypes';
 import { makeRequest } from '../../helpers/makeRequest';
-import { Technology } from '../../types';
+import { CodeSnippet } from '../../types';
 
 interface CodeSnippetsProps {
-  technologies: Technology[],
-  technologiesCount: number,
+  codeSnippets: CodeSnippet[],
+  codeSnippetsCount: number,
   currentPage: number
 }
 
 const CodeSnippets = (props: CodeSnippetsProps) => {
-  const { technologies, technologiesCount, currentPage } = props;
+  const { codeSnippets, codeSnippetsCount, currentPage } = props;
 
   return (
     <SidebarWithHeader>
 
       <Stack spacing={4}>
-        <Heading>Code Snippets Technologies</Heading>
+        <Heading>Code Snippets</Heading>
 
-        <SimpleGrid columns={{ base: 1, md: 3, lg: 4 }} spacing={2}>
-          {technologies.map((technology: Technology) => (
+        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={2}>
+          {codeSnippets.map((codeSnippet: CodeSnippet) => (
             <CodeSnippetCard
-              key={technology._id}
-              technology={technology}
-              buttonText="Go to the snippets"
-              buttonLink={getTechnologyCodeSnippetsURL(technology.slug)}
+              key={codeSnippet._id}
+              codeSnippet={codeSnippet}
             />
           ))}
         </SimpleGrid>
@@ -42,9 +40,9 @@ const CodeSnippets = (props: CodeSnippetsProps) => {
         <Flex justifyContent="flex-end">
           <Paginator
             currentPage={currentPage}
-            pageSize={GET_TECHNOLOGIES_WITH_PAGINATION_PAGE_SIZE}
+            pageSize={GET_CODE_SNIPPETS_WITH_PAGINATION_PAGE_SIZE}
             basePageURL={CODE_SNIPPETS_PAGE_URL}
-            totalRows={technologiesCount}
+            totalRows={codeSnippetsCount}
           />
         </Flex>
 
@@ -57,14 +55,14 @@ const CodeSnippets = (props: CodeSnippetsProps) => {
 export const getServerSideProps = withPageAuthRequired({
   async getServerSideProps({ req, query: { page = PAGINATION_DEFAULT_INITIAL_PAGE } }) {
     const { data } = await makeRequest({
-      url: GET_API_TECHNOLOGIES,
+      url: GET_API_CODE_SNIPPETS,
       method: 'GET',
       headers: { Cookie: req.headers.cookie },
       params: { page },
     });
 
-    const { technologies, technologiesCount } = data;
-    return { props: { technologies, currentPage: convertToNumber(page), technologiesCount } };
+    const { codeSnippets, codeSnippetsCount } = data;
+    return { props: { codeSnippets, currentPage: convertToNumber(page), codeSnippetsCount } };
   },
 });
 

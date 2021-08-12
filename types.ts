@@ -25,7 +25,7 @@ export interface InterviewQuestion {
     _id?: string;
     question: string,
     answer: string,
-    technologyID?: number,
+    technologyId?: string,
 }
 
 export interface CodeSnippet {
@@ -33,5 +33,5 @@ export interface CodeSnippet {
     title: string;
     description: string;
     content: string;
-    technologyID?: number,
+    technology?: string,
 }
