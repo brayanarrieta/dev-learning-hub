@@ -12,7 +12,7 @@ import Router from 'next/router';
 import { CodeSnippet, Technology } from '../types';
 import { getCodeSnippetURLById } from '../constants/pageURLs';
 
-interface CodeSnippetComposed extends Omit<CodeSnippet, 'technology'> {
+export interface CodeSnippetComposed extends Omit<CodeSnippet, 'technology'> {
   technology: Technology
 }
 

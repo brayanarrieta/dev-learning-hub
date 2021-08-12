@@ -16,4 +16,3 @@ export const getCodeSnippetsWithPagination = async (currentPage: any) => {
     codeSnippetsCount,
   };
 };
-

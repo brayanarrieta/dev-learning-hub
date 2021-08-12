@@ -7,14 +7,13 @@ import Paginator from '../../components/Paginator';
 import { GET_API_CODE_SNIPPETS } from '../../constants/apiURLs';
 import { GET_CODE_SNIPPETS_WITH_PAGINATION_PAGE_SIZE, PAGINATION_DEFAULT_INITIAL_PAGE } from '../../constants/config';
 import { CODE_SNIPPETS_PAGE_URL } from '../../constants/pageURLs';
-import CodeSnippetCard from '../../custom-components/CodeSnippetCard';
+import CodeSnippetCard, { CodeSnippetComposed } from '../../custom-components/CodeSnippetCard';
 import SidebarWithHeader from '../../custom-components/Layout/SidebarWithHeader';
 import { convertToNumber } from '../../helpers/convertTypes';
 import { makeRequest } from '../../helpers/makeRequest';
-import { CodeSnippet } from '../../types';
 
 interface CodeSnippetsProps {
-  codeSnippets: CodeSnippet[],
+  codeSnippets: CodeSnippetComposed[],
   codeSnippetsCount: number,
   currentPage: number
 }
@@ -29,7 +28,7 @@ const CodeSnippets = (props: CodeSnippetsProps) => {
         <Heading>Code Snippets</Heading>
 
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={2}>
-          {codeSnippets.map((codeSnippet: CodeSnippet) => (
+          {codeSnippets.map((codeSnippet: CodeSnippetComposed) => (
             <CodeSnippetCard
               key={codeSnippet._id}
               codeSnippet={codeSnippet}
