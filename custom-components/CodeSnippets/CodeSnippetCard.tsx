@@ -8,9 +8,7 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
-import Router from 'next/router';
-import { CodeSnippet, Technology } from '../types';
-import { getCodeSnippetURLById } from '../constants/pageURLs';
+import { CodeSnippet, Technology } from '../../types';
 
 export interface CodeSnippetComposed extends Omit<CodeSnippet, 'technology'> {
   technology: Technology
@@ -18,10 +16,11 @@ export interface CodeSnippetComposed extends Omit<CodeSnippet, 'technology'> {
 
 interface CodeSnippetCardProps {
     codeSnippet: CodeSnippetComposed,
+    handleOpenCodeSnippetModal: any,
 }
 
 const CodeSnippetCard = ({
-  codeSnippet,
+  codeSnippet, handleOpenCodeSnippetModal,
 }: CodeSnippetCardProps) => {
   const shouldTruncateCourseTitle = useBreakpointValue({ base: false, md: true });
 
@@ -37,7 +36,7 @@ const CodeSnippetCard = ({
       borderColor="teal.400"
     >
       <Flex justifyContent="space-between" flexDirection={{ base: 'column', md: 'row' }}>
-        <Text fontSize={{ base: 'md', md: 'lg' }} fontWeight="semibold" isTruncated={shouldTruncateCourseTitle}>{codeSnippet.title}</Text>
+        <Text fontSize="md" fontWeight="semibold" isTruncated={shouldTruncateCourseTitle}>{codeSnippet.title}</Text>
         <Text
           fontSize="sm"
           fontWeight={500}
@@ -58,8 +57,7 @@ const CodeSnippetCard = ({
           fontWeight={600}
           color="white"
           bg="teal.400"
-          as="a"
-          onClick={() => Router.push(getCodeSnippetURLById(codeSnippet._id))}
+          onClick={() => handleOpenCodeSnippetModal(codeSnippet)}
           _hover={{
             bg: 'teal.500',
           }}
