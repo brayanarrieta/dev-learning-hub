@@ -17,4 +17,4 @@ export const getTechnologiesWithPagination = async (currentPage: any) => {
   };
 };
 
-export const getTechnologyBySlug = async (slug: string) => getTechnologyBySlugDal(slug);
+export const getTechnologyBySlug = async (slug: any) => getTechnologyBySlugDal(slug);
