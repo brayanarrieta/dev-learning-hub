@@ -1,15 +1,17 @@
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import {
+  Button,
   Flex,
   Heading,
   SimpleGrid,
   Stack,
 } from '@chakra-ui/react';
+import Router from 'next/router';
 import React from 'react';
 import Paginator from '../../components/Paginator';
 import { GET_API_COMMUNITY_REQUESTS } from '../../constants/apiURLs';
 import { GET_COMMUNITY_REQUESTS_WITH_PAGINATION_PAGE_SIZE, PAGINATION_DEFAULT_INITIAL_PAGE } from '../../constants/config';
-import { COMMUNITY_REQUESTS_PAGE_URL } from '../../constants/pageURLs';
+import { COMMUNITY_REQUESTS_PAGE_URL, CREATE_COMMUNITY_REQUESTS_PAGE_URL } from '../../constants/pageURLs';
 import CommunityRequestCard from '../../custom-components/CommunityRequests/CommunityRequestCard';
 import SidebarWithHeader from '../../custom-components/Layout/SidebarWithHeader';
 import { convertToNumber } from '../../helpers/convertTypes';
@@ -30,7 +32,22 @@ const CommunityRequests = (props: CommunityRequestsProps) => {
 
       <Stack spacing={4}>
 
-        <Heading> Community Requests</Heading>
+        <Stack direction={['column', 'row']} justifyContent="space-between">
+          <Heading> Community Requests</Heading>
+
+          <Button
+            fontSize="sm"
+            fontWeight={600}
+            color="white"
+            bg="teal.400"
+            onClick={() => Router.push(CREATE_COMMUNITY_REQUESTS_PAGE_URL)}
+            _hover={{
+              bg: 'teal.500',
+            }}
+          >
+            New community request
+          </Button>
+        </Stack>
 
         <SimpleGrid columns={1} spacing={2}>
           {communityRequests.map((communityRequest: CommunityRequest) => (

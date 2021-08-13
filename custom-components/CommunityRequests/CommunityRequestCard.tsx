@@ -15,6 +15,7 @@ interface CommunityRequestCardProps {
     communityRequest: CommunityRequest,
 }
 
+// TODO: Fix issue with responsive UI
 const CommunityRequestCard = ({
   communityRequest,
 }: CommunityRequestCardProps) => {
