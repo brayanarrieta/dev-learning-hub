@@ -22,3 +22,10 @@ export enum CommunityRequestType {
     COURSE = 'Course',
     INTERVIEW_QUESTION = 'Interview Question',
 }
+
+export enum CommunityRequestState {
+    REVIEW ='Review',
+    MERGED ='Merged',
+    CLOSED = 'Closed',
+    REJECTED = 'Rejected',
+}

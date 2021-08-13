@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { CommunityRequestType } from '../../constants/enums';
+import { CommunityRequestState, CommunityRequestType } from '../../constants/enums';
 
 const { Schema } = mongoose;
 
@@ -14,6 +14,18 @@ const CommunityRequestModel = new mongoose.Schema({
   type: {
     type: String,
     enum: Object.values(CommunityRequestType),
+  },
+  user: {
+    type: Schema.Types.Mixed,
+    default: {},
+  },
+  approves: {
+    type: [String],
+    default: [],
+  },
+  state: {
+    type: String,
+    enum: Object.values(CommunityRequestState),
   },
 },
 {

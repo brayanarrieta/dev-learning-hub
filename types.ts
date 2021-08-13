@@ -1,3 +1,5 @@
+import { CommunityRequestState, CommunityRequestType } from './constants/enums';
+
 export interface NavItem {
     label: string;
     href?: string;
@@ -35,12 +37,15 @@ export interface CodeSnippet {
     content: string;
     technology?: string,
 }
-
-export type CommunityRequestType = 'Code Snippet' | 'Course' | 'Interview Question';
-
 export interface CommunityRequest {
+    _id?: string;
     title: string;
     type: CommunityRequestType
-    // user: any;
-    descriptionData: CodeSnippet | InterviewQuestion | Course;
+    user: {
+        name: string,
+        email: string,
+    }
+    descriptionData: any;
+    state: CommunityRequestState;
+    approves: string[];
 }

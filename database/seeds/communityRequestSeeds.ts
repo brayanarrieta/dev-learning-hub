@@ -1,4 +1,4 @@
-import { CommunityRequestType } from '../../constants/enums';
+import { CommunityRequestState, CommunityRequestType } from '../../constants/enums';
 import { CommunityRequest } from '../../types';
 
 const COMMUNITY_REQUEST_SEEDS: CommunityRequest[] = [
@@ -9,6 +9,12 @@ const COMMUNITY_REQUEST_SEEDS: CommunityRequest[] = [
       question: 'What is React?',
       answer: 'React is an open-source JavaScript library created by Facebook for building complex, interactive UIs in web and mobile applications.',
     },
+    user: {
+      name: 'Brayan Arrieta Alfaro',
+      email: 'brayan.arrieta.alfaro.96@gmail.com',
+    },
+    approves: [],
+    state: CommunityRequestState.REVIEW,
   },
 
 ];

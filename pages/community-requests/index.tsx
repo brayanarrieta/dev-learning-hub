@@ -1,29 +1,57 @@
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import {
+  Flex,
   Heading,
+  SimpleGrid,
   Stack,
 } from '@chakra-ui/react';
 import React from 'react';
+import Paginator from '../../components/Paginator';
 import { GET_API_COMMUNITY_REQUESTS } from '../../constants/apiURLs';
-import { PAGINATION_DEFAULT_INITIAL_PAGE } from '../../constants/config';
+import { GET_COMMUNITY_REQUESTS_WITH_PAGINATION_PAGE_SIZE, PAGINATION_DEFAULT_INITIAL_PAGE } from '../../constants/config';
+import { COMMUNITY_REQUESTS_PAGE_URL } from '../../constants/pageURLs';
+import CommunityRequestCard from '../../custom-components/CommunityRequests/CommunityRequestCard';
 import SidebarWithHeader from '../../custom-components/Layout/SidebarWithHeader';
 import { convertToNumber } from '../../helpers/convertTypes';
 import { makeRequest } from '../../helpers/makeRequest';
+import { CommunityRequest } from '../../types';
 
-interface CommunityRequestsProps {}
+interface CommunityRequestsProps {
 
-// eslint-disable-next-line no-unused-vars
-const CommunityRequests = (props: CommunityRequestsProps) => (
-  <SidebarWithHeader>
+  currentPage: number;
+  communityRequests: CommunityRequest[],
+  communityRequestsCount: number,
+}
 
-    <Stack spacing={4}>
+const CommunityRequests = (props: CommunityRequestsProps) => {
+  const { currentPage, communityRequests, communityRequestsCount } = props;
+  return (
+    <SidebarWithHeader>
 
-      <Heading> Community Requests</Heading>
+      <Stack spacing={4}>
 
-    </Stack>
+        <Heading> Community Requests</Heading>
 
-  </SidebarWithHeader>
-);
+        <SimpleGrid columns={1} spacing={2}>
+          {communityRequests.map((communityRequest: CommunityRequest) => (
+            <CommunityRequestCard key={communityRequest._id} communityRequest={communityRequest} />
+          ))}
+        </SimpleGrid>
+
+        <Flex justifyContent="flex-end">
+          <Paginator
+            currentPage={currentPage}
+            pageSize={GET_COMMUNITY_REQUESTS_WITH_PAGINATION_PAGE_SIZE}
+            basePageURL={COMMUNITY_REQUESTS_PAGE_URL}
+            totalRows={communityRequestsCount}
+          />
+        </Flex>
+
+      </Stack>
+
+    </SidebarWithHeader>
+  );
+};
 
 export const getServerSideProps = withPageAuthRequired({
   async getServerSideProps({ req, query: { page = PAGINATION_DEFAULT_INITIAL_PAGE } }) {
