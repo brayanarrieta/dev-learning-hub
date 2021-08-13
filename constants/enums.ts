@@ -16,3 +16,9 @@ export enum CoursePlatform {
     COURSERA = 'Coursera',
     YOUTUBE = 'YouTube',
 }
+
+export enum CommunityRequestType {
+    CODE_SNIPPET = 'Code Snippet',
+    COURSE = 'Course',
+    INTERVIEW_QUESTION = 'Interview Question',
+}

@@ -35,3 +35,12 @@ export interface CodeSnippet {
     content: string;
     technology?: string,
 }
+
+export type CommunityRequestType = 'Code Snippet' | 'Course' | 'Interview Question';
+
+export interface CommunityRequest {
+    title: string;
+    type: CommunityRequestType
+    // user: any;
+    descriptionData: CodeSnippet | InterviewQuestion | Course;
+}

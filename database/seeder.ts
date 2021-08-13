@@ -1,11 +1,13 @@
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import { bulkInsertCodeSnippetsDal, truncateCodeSnippetsDal } from '../dal/codeSnippetRepository';
+import { bulkInsertCommunityRequestDal, truncateCommunityRequestDal } from '../dal/communityRequestRepository';
 import { bulkInsertCourses, truncateCourses } from '../dal/courseRepository';
 import { bulkInterviewQuestions, truncateInterviewQuestions } from '../dal/interviewQuestionRepository';
 import { bulkInsertTechnologies, truncateTechnologies } from '../dal/technologyRepository';
 import { Technology } from '../types';
 import CODE_SNIPPETS_SEEDS from './seeds/codeSnippetsSeeds';
+import COMMUNITY_REQUEST_SEEDS from './seeds/communityRequestSeeds';
 import COURSES_SEEDS from './seeds/coursesSeeds';
 import INTERVIEW_QUESTIONS_SEEDS from './seeds/interviewQuestions';
 import TECHNOLOGIES_SEEDS from './seeds/technologiesSeeds';
@@ -19,6 +21,7 @@ const truncate = async () => {
   await truncateTechnologies();
   await truncateInterviewQuestions();
   await truncateCodeSnippetsDal();
+  await truncateCommunityRequestDal();
 };
 
 const importData = async () => {
@@ -47,6 +50,8 @@ const importData = async () => {
       return bulkInsertCodeSnippetsDal(codeSnippets);
     }),
   );
+
+  await bulkInsertCommunityRequestDal(COMMUNITY_REQUEST_SEEDS);
 };
 
 const seeder = async () => {
