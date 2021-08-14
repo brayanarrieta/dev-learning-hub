@@ -23,7 +23,7 @@ interface SelectFormFieldProps extends Omit<FormFieldProps, 'validationRules'> {
 
 const SelectFormField = (props: SelectFormFieldProps) => {
   const {
-    controlField,
+    formControl,
     fieldName,
     defaultValue,
     fieldLabel,
@@ -40,7 +40,7 @@ const SelectFormField = (props: SelectFormFieldProps) => {
   return (
     <Controller
       name={fieldName}
-      control={controlField}
+      control={formControl}
       defaultValue={defaultValue}
       rules={rules}
       render={({ field: { onChange, value }, fieldState: { error } }) => (

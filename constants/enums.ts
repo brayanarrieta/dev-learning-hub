@@ -15,6 +15,7 @@ export enum CoursePlatform {
     UDEMY = 'Udemy',
     COURSERA = 'Coursera',
     YOUTUBE = 'YouTube',
+    PLURALSIGHT ='Pluralsight'
 }
 
 export enum CommunityRequestType {

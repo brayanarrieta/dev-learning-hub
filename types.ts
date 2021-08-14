@@ -1,11 +1,9 @@
-import { CommunityRequestState, CommunityRequestType } from './constants/enums';
+import { CommunityRequestState, CommunityRequestType, CoursePlatform } from './constants/enums';
 
 export interface NavItem {
     label: string;
     href?: string;
 }
-
-export type CoursePlatform = 'Udemy' | 'Coursera' | 'YouTube';
 
 export interface Course {
     _id?: string;

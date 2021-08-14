@@ -2,23 +2,24 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
-  Input,
+  Textarea,
 } from '@chakra-ui/react';
 import React from 'react';
 import { Controller } from 'react-hook-form';
 
-export interface FormFieldProps {
-    formControl: any;
-    fieldName: string;
-    defaultValue?: any;
-    fieldLabel: string;
-    validationRules?: {
-        isRequired?: boolean;
-        minLength?: number;
-    }
-}
+export interface TextAreaFormFieldProps {
+      formControl: any;
+      fieldName: string;
+      defaultValue?: any;
+      fieldLabel: string;
+      validationRules?: {
+          isRequired?: boolean;
+          minLength?: number;
+      }
+  }
 
-const FormField = (props: FormFieldProps) => {
+// TODO: Check this component are sharing logic of FormField component
+const TextAreaFormField = (props: TextAreaFormFieldProps) => {
   const {
     formControl, fieldName, defaultValue, fieldLabel, validationRules,
   } = props;
@@ -41,7 +42,7 @@ const FormField = (props: FormFieldProps) => {
       render={({ field: { onChange, value }, fieldState: { error } }) => (
         <FormControl isInvalid={!!error}>
           <FormLabel>{fieldLabel}</FormLabel>
-          <Input onChange={onChange} value={value} />
+          <Textarea onChange={onChange} value={value} />
           {error && <FormErrorMessage>{error.message}</FormErrorMessage>}
         </FormControl>
       )}
@@ -49,9 +50,9 @@ const FormField = (props: FormFieldProps) => {
   );
 };
 
-FormField.defaultProps = {
+TextAreaFormField.defaultProps = {
   defaultValue: '',
   validationRules: {},
 };
 
-export default FormField;
+export default TextAreaFormField;

@@ -17,6 +17,7 @@
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
     "axios": "^0.21.1",
+    "chakra-ui-markdown-renderer": "^3.0.1",
     "dotenv": "^10.0.0",
     "framer-motion": "^4.1.17",
     "mongoose": "^5.13.5",
