@@ -28,12 +28,12 @@ const CommunityRequestsAdd = () => {
     control, handleSubmit, watch, unregister,
   } = useForm<IFormInput>();
 
-  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+  const onSubmit: SubmitHandler<IFormInput> = async (communityRequestData) => {
     // eslint-disable-next-line no-unused-vars
-    const { success } = await makeRequest({
+    const { data } = await makeRequest({
       method: HTTP_METHODS.POST,
       url: POST_API_COMMUNITY_REQUESTS,
-      data,
+      data: communityRequestData,
     });
   };
 
