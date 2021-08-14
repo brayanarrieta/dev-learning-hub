@@ -9,7 +9,7 @@ const InterviewQuestionModel = new mongoose.Schema({
   answer: {
     type: String,
   },
-  technologyId: {
+  technology: {
     type: Schema.Types.ObjectId,
     ref: 'Technology',
   },

@@ -2,7 +2,7 @@ import { withApiAuthRequired } from '@auth0/nextjs-auth0';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { HTTP_METHODS } from '../../../constants/enums';
 import dbConnect from '../../../database/dbConnect';
-import { getTechnologiesWithPagination } from '../../../services/technologiesService';
+import { getTechnologies, getTechnologiesWithPagination } from '../../../services/technologiesService';
 
 const handler = withApiAuthRequired(async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
@@ -13,8 +13,14 @@ const handler = withApiAuthRequired(async (req: NextApiRequest, res: NextApiResp
     case HTTP_METHODS.GET:
       try {
         const { page } = req.query;
-        const { technologies, technologiesCount } = await getTechnologiesWithPagination(page);
-        res.status(200).json({ success: true, technologies, technologiesCount });
+
+        if (page) {
+          const { technologies, technologiesCount } = await getTechnologiesWithPagination(page);
+          res.status(200).json({ success: true, technologies, technologiesCount });
+        } else {
+          const technologies = await getTechnologies();
+          res.status(200).json({ success: true, technologies });
+        }
       } catch (error) {
         res.status(400).json({ success: false });
       }

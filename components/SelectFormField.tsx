@@ -57,7 +57,7 @@ const SelectFormField = (props: SelectFormFieldProps) => {
                   key={`select-option-${option.label}-${option.value}`}
                   value={option.value}
                 >
-                  {option.value}
+                  {option.label}
                 </option>
               ))
             }

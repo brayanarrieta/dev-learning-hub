@@ -25,7 +25,7 @@ export interface InterviewQuestion {
     _id?: string;
     question: string,
     answer: string,
-    technologyId?: string,
+    technology?: string,
 }
 
 export interface CodeSnippet {

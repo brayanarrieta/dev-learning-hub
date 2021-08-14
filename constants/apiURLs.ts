@@ -1,3 +1,5 @@
+import { BASE_URL } from './config';
+
 export const GET_API_COURSES = '/api/courses';
 
 export const GET_API_TECHNOLOGIES = '/api/technologies';
@@ -11,3 +13,5 @@ export const getAPIInterviewQuestionsByTechnologyId = (
 export const GET_API_CODE_SNIPPETS = '/api/code-snippets';
 
 export const GET_API_COMMUNITY_REQUESTS = '/api/community-requests';
+
+export const SWR_GET_API_TECHNOLOGIES = `${BASE_URL}${GET_API_TECHNOLOGIES}`;

@@ -1,3 +1,4 @@
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import {
   Divider,
   Flex,
@@ -10,6 +11,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { CommunityRequestType } from '../../constants/enums';
 import CommonForm from '../../custom-components/CommunityRequests/Forms/CommonForm';
 import CourseForm from '../../custom-components/CommunityRequests/Forms/CourseForm';
+import InterviewQuestionForm from '../../custom-components/CommunityRequests/Forms/InterviewQuestionForm';
 import SidebarWithHeader from '../../custom-components/Layout/SidebarWithHeader';
 
 interface IFormInput {
@@ -35,6 +37,9 @@ const CommunityRequestsAdd = () => {
   const getCommunityRequestSubForm = () => {
     if (communityRequestType === CommunityRequestType.COURSE) {
       return <CourseForm formControl={control} unregisterFields={unregister} />;
+    }
+    if (communityRequestType === CommunityRequestType.INTERVIEW_QUESTION) {
+      return <InterviewQuestionForm formControl={control} unregisterFields={unregister} />;
     }
 
     return null;
@@ -71,5 +76,7 @@ const CommunityRequestsAdd = () => {
     </SidebarWithHeader>
   );
 };
+
+export const getServerSideProps = withPageAuthRequired();
 
 export default CommunityRequestsAdd;

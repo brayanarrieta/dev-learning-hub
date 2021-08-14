@@ -19,3 +19,5 @@ export const getTechnologiesWithPaginationDal = async (currentPage: number, page
 };
 
 export const getTechnologyBySlugDal = async (slug: string) => Technology.findOne({ slug });
+
+export const getTechnologiesDal = async () => Technology.find();

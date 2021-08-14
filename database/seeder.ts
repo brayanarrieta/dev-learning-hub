@@ -32,7 +32,7 @@ const importData = async () => {
       technology: Technology,
     ) => {
       const questions = (INTERVIEW_QUESTIONS_SEEDS[technology.name] || []).map(
-        (i) => ({ ...i, technologyId: technology._id }),
+        (i) => ({ ...i, technology: technology._id }),
       );
 
       return bulkInterviewQuestions(questions);
