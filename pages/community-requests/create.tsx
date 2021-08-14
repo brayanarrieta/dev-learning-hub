@@ -8,11 +8,14 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { CommunityRequestType } from '../../constants/enums';
+import { POST_API_COMMUNITY_REQUESTS } from '../../constants/apiURLs';
+import { CommunityRequestType, HTTP_METHODS } from '../../constants/enums';
+import CodeSnippetForm from '../../custom-components/CommunityRequests/Forms/CodeSnippetForm';
 import CommonForm from '../../custom-components/CommunityRequests/Forms/CommonForm';
 import CourseForm from '../../custom-components/CommunityRequests/Forms/CourseForm';
 import InterviewQuestionForm from '../../custom-components/CommunityRequests/Forms/InterviewQuestionForm';
 import SidebarWithHeader from '../../custom-components/Layout/SidebarWithHeader';
+import { makeRequest } from '../../helpers/makeRequest';
 
 interface IFormInput {
   title: string;
@@ -25,8 +28,13 @@ const CommunityRequestsAdd = () => {
     control, handleSubmit, watch, unregister,
   } = useForm<IFormInput>();
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    // eslint-disable-next-line no-unused-vars
+    const { success } = await makeRequest({
+      method: HTTP_METHODS.POST,
+      url: POST_API_COMMUNITY_REQUESTS,
+      data,
+    });
   };
 
   const communityRequestType = watch('type');
@@ -40,6 +48,10 @@ const CommunityRequestsAdd = () => {
     }
     if (communityRequestType === CommunityRequestType.INTERVIEW_QUESTION) {
       return <InterviewQuestionForm formControl={control} unregisterFields={unregister} />;
+    }
+
+    if (communityRequestType === CommunityRequestType.CODE_SNIPPET) {
+      return <CodeSnippetForm formControl={control} unregisterFields={unregister} />;
     }
 
     return null;

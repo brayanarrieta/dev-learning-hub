@@ -16,7 +16,7 @@ const CommonForm = (props: CommonFormProps) => {
       <FormField
         formControl={formControl}
         fieldName="title"
-        fieldLabel="Title"
+        fieldLabel="Community Request Title"
         validationRules={{
           isRequired: true,
           minLength: 10,
@@ -26,7 +26,7 @@ const CommonForm = (props: CommonFormProps) => {
       <SelectFormField
         formControl={formControl}
         fieldName="type"
-        fieldLabel="Type"
+        fieldLabel="Community Request Type"
         validationRules={{
           isRequired: true,
         }}

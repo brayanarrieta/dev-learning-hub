@@ -8,7 +8,8 @@ export enum HTTP_STATUS_CODES {
 }
 
 export enum HTTP_METHODS {
-    GET = 'GET'
+    GET = 'GET',
+    POST = 'POST',
 }
 
 export enum CoursePlatform {
