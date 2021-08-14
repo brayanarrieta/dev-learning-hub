@@ -15,5 +15,3 @@ export const GET_API_CODE_SNIPPETS = '/api/code-snippets';
 export const GET_API_COMMUNITY_REQUESTS = '/api/community-requests';
 
 export const POST_API_COMMUNITY_REQUESTS = GET_API_COMMUNITY_REQUESTS;
-
-export const SWR_GET_API_TECHNOLOGIES = `${BASE_URL}${GET_API_TECHNOLOGIES}`;

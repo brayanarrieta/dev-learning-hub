@@ -1,14 +1,14 @@
 import {
-  Button, Flex, SimpleGrid, Stack,
+  Button, Flex, SimpleGrid, Stack, useToast,
 } from '@chakra-ui/react';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FiPlus } from 'react-icons/fi';
-import useSWR from 'swr';
 import FormField from '../../../components/FormField';
 import MarkdownFormField from '../../../components/MarkdownFormField';
 import SelectFormField from '../../../components/SelectFormField';
-import { SWR_GET_API_TECHNOLOGIES } from '../../../constants/apiURLs';
-import { fetcher } from '../../../helpers/requestHelpers';
+import { GET_API_TECHNOLOGIES } from '../../../constants/apiURLs';
+import { HTTP_METHODS } from '../../../constants/enums';
+import { makeRequest } from '../../../helpers/makeRequest';
 import { Technology } from '../../../types';
 
   interface InterviewQuestionFormProps {
@@ -20,19 +20,37 @@ const DESCRIPTION_DATA = 'descriptionData';
 
 const InterviewQuestionForm = (props: InterviewQuestionFormProps) => {
   const { formControl, unregisterFields } = props;
+  const [technologies, setTechnologies] = useState([]);
+  const toast = useToast();
 
-  useEffect(() => () => {
-    unregisterFields(DESCRIPTION_DATA);
-  }, [unregisterFields]);
+  useEffect(() => {
+    const loadTechnologies = async () => {
+      const { data } = await makeRequest({
+        method: HTTP_METHODS.GET,
+        url: GET_API_TECHNOLOGIES,
+      });
 
-  // TODO: Add error handler
-  // eslint-disable-next-line no-unused-vars
-  const { data, error: getTechnologiesError } = useSWR(
-    SWR_GET_API_TECHNOLOGIES,
-    fetcher,
-  );
+      const { success, technologies: technologiesData } = data;
 
-  const { technologies = [] } = data || {};
+      if (!success) {
+        toast({
+          title: 'Something when wrong loading the technologies',
+          description: 'Error loading the technologies, please try again later',
+          status: 'error',
+          duration: 4000,
+          isClosable: true,
+        });
+        return;
+      }
+
+      setTechnologies(technologiesData);
+    };
+
+    loadTechnologies();
+    return () => {
+      unregisterFields(DESCRIPTION_DATA);
+    };
+  }, [unregisterFields, toast]);
 
   return (
     <Stack spacing={4}>
