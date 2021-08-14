@@ -26,6 +26,7 @@ const CommunityRequestModel = new mongoose.Schema({
   state: {
     type: String,
     enum: Object.values(CommunityRequestState),
+    default: CommunityRequestState.REVIEW,
   },
 },
 {

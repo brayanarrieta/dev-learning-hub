@@ -19,3 +19,7 @@ export const getCommunityRequestsWithPaginationDal = async (
     .limit(pageSize);
   return communityRequests;
 };
+
+export const createCommunityRequestDal = async (
+  communityRequest: any,
+) => CommunityRequest.create(communityRequest);

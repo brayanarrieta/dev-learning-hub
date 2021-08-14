@@ -5,6 +5,7 @@ import {
   Heading,
   Stack,
   useColorModeValue,
+  useToast,
 } from '@chakra-ui/react';
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -19,28 +20,44 @@ import { makeRequest } from '../../helpers/makeRequest';
 
 interface IFormInput {
   title: string;
-  type: CommunityRequestType;
+  type: string;
   descriptionData: any;
 }
 
-const CommunityRequestsAdd = () => {
+interface CommunityRequestsAddProps {
+  user: any
+}
+
+const CommunityRequestsAdd = ({ user }: CommunityRequestsAddProps) => {
   const {
-    control, handleSubmit, watch, unregister,
+    control, handleSubmit, watch, unregister, reset,
   } = useForm<IFormInput>();
 
+  const toast = useToast();
+
   const onSubmit: SubmitHandler<IFormInput> = async (communityRequestData) => {
-    // eslint-disable-next-line no-unused-vars
+    const { name, email } = user;
+    const communityRequest = { ...communityRequestData, user: { name, email } };
+
     const { data } = await makeRequest({
       method: HTTP_METHODS.POST,
       url: POST_API_COMMUNITY_REQUESTS,
-      data: communityRequestData,
+      data: communityRequest,
     });
+
+    const { success } = data;
+
+    toast({
+      title: success ? 'The community request was created successfully' : 'Something when wrong processing the community request',
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+    });
+
+    reset({ title: '', type: '' });
   };
 
   const communityRequestType = watch('type');
-  const watchAll = watch();
-
-  console.log(watchAll);
 
   const getCommunityRequestSubForm = () => {
     if (communityRequestType === CommunityRequestType.COURSE) {

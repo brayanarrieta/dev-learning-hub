@@ -44,6 +44,6 @@ export interface CommunityRequest {
         email: string,
     }
     descriptionData: any;
-    state: CommunityRequestState;
-    approves: string[];
+    state?: CommunityRequestState;
+    approves?: string[];
 }
