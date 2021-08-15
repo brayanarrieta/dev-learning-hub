@@ -67,10 +67,13 @@ const MarkdownFormField = (props: MarkdownFormFieldProps) => {
   const rules = {
     required: isRequired ? `${fieldLabel} field is required` : false,
     ...(minLength ? {
-      value: minLength,
-      message: `${fieldLabel} must have a min length of ${minLength} characters`,
+      minLength: {
+        value: minLength,
+        message: `${fieldLabel} must have a min length of ${minLength} characters`,
+      },
     } : {}),
   };
+
   return (
     <Controller
       name={fieldName}

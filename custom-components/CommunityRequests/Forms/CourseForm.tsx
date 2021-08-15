@@ -6,6 +6,7 @@ import { FiPlus } from 'react-icons/fi';
 import FormField from '../../../components/FormField';
 import MarkdownFormField from '../../../components/MarkdownFormField';
 import SelectFormField from '../../../components/SelectFormField';
+import TextAreaFormField from '../../../components/TextAreaFormField';
 import { CoursePlatform } from '../../../constants/enums';
 
 interface CourseFormProps {
@@ -69,11 +70,10 @@ const CourseForm = (props: CourseFormProps) => {
         fieldLabel="Course Link"
         validationRules={{
           isRequired: true,
-          minLength: 10,
         }}
       />
 
-      <MarkdownFormField
+      <TextAreaFormField
         formControl={formControl}
         fieldName={`${DESCRIPTION_DATA}.description`}
         fieldLabel="Course Description"
