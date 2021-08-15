@@ -20,11 +20,12 @@ interface CommonFooterViewProps {
     currentUser: any;
     handleMerge: any;
     state: any;
+    isMergingTheCommunityRequest: boolean;
 }
 
 const CommonFooterView = (props: CommonFooterViewProps) => {
   const {
-    user, approves, handleApprove, currentUser, handleMerge, state,
+    user, approves, handleApprove, currentUser, handleMerge, state, isMergingTheCommunityRequest,
   } = props;
 
   const isCommunityRequestApproved = approves.length >= COMMUNITY_REQUEST_APPROVES_REQUIRED;
@@ -46,7 +47,7 @@ const CommonFooterView = (props: CommonFooterViewProps) => {
             bg: 'teal.500',
           }}
           rightIcon={isCommunityRequestApproved ? <BiGitMerge /> : <IoMdPeople />}
-          disabled={!isCommunityRequestApproved}
+          disabled={!isCommunityRequestApproved || isMergingTheCommunityRequest}
           onClick={handleMerge}
         >
           {isCommunityRequestApproved ? 'Merge' : 'Waiting review'}

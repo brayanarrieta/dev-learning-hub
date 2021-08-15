@@ -23,6 +23,8 @@ const CommunityRequestDetails = (props: CommunityRequestProps) => {
 
   const [communityRequest, setCommunityRequest] = useState(communityRequestInitialData);
 
+  const [isMergingTheCommunityRequest, setIsMergingTheCommunityRequest] = useState(false);
+
   const {
     type, descriptionData, state,
   } = communityRequest;
@@ -52,6 +54,7 @@ const CommunityRequestDetails = (props: CommunityRequestProps) => {
   };
 
   const handleCommunityRequestMerge = async () => {
+    setIsMergingTheCommunityRequest(true);
     const { data } = await makeRequest({
       method: HTTP_METHODS.POST,
       url: postAPIMergeCommunityRequest(communityRequest._id),
@@ -64,8 +67,10 @@ const CommunityRequestDetails = (props: CommunityRequestProps) => {
       setCommunityRequest({ ...communityRequestInitialData, ...data.communityRequest });
     }
 
+    setIsMergingTheCommunityRequest(false);
+
     toast({
-      title: success ? 'The community request was approved successfully' : 'Something when wrong processing the community request approve',
+      title: success ? 'The community request was merged successfully' : 'Something when wrong processing the community request merge',
       status: success ? 'success' : 'error',
       duration: 3000,
       isClosable: true,
@@ -108,6 +113,7 @@ const CommunityRequestDetails = (props: CommunityRequestProps) => {
           handleApprove={handleCommunityRequestApprove}
           handleMerge={handleCommunityRequestMerge}
           state={state}
+          isMergingTheCommunityRequest={isMergingTheCommunityRequest}
         />
 
       </Stack>
