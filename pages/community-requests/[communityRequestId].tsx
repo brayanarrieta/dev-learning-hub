@@ -5,9 +5,10 @@ import {
   HStack,
   Stack,
   Text,
+  useToast,
 } from '@chakra-ui/react';
-import React from 'react';
-import { getAPICommunityRequestById } from '../../constants/apiURLs';
+import React, { useState } from 'react';
+import { getAPICommunityRequestById, postAPIApproveCommunityRequest } from '../../constants/apiURLs';
 import { CommunityRequestType, HTTP_METHODS } from '../../constants/enums';
 import CommonFooterView from '../../custom-components/CommunityRequests/Views/CommonFooterView';
 import CourseView from '../../custom-components/CommunityRequests/Views/CourseView';
@@ -16,17 +17,42 @@ import { makeRequest } from '../../helpers/makeRequest';
 import { CommunityRequest } from '../../types';
 
 interface CommunityRequestProps {
-  communityRequest: CommunityRequest;
+  communityRequestInitialData: CommunityRequest;
+  user: any;
 }
 
 const CommunityRequestDetails = (props: CommunityRequestProps) => {
-  // eslint-disable-next-line no-unused-vars
-  const { communityRequest } = props;
+  const { communityRequestInitialData, user: currentUser } = props;
+
+  const [communityRequest, setCommunityRequest] = useState(communityRequestInitialData);
 
   const {
-    title, type, descriptionData, state, user, approves,
-
+    title, type, descriptionData, state,
   } = communityRequest;
+
+  const toast = useToast();
+
+  const handleCommunityRequestApprove = async () => {
+    const { data } = await makeRequest({
+      method: HTTP_METHODS.POST,
+      url: postAPIApproveCommunityRequest(communityRequest._id),
+      data: { userEmail: currentUser.email },
+    });
+
+    const { success } = data;
+
+    if (success) {
+      const { communityRequestApproves } = data;
+      setCommunityRequest({ ...communityRequestInitialData, approves: communityRequestApproves });
+    }
+
+    toast({
+      title: success ? 'The community request was approved successfully' : 'Something when wrong processing the community request approve',
+      status: success ? 'success' : 'error',
+      duration: 3000,
+      isClosable: true,
+    });
+  };
 
   const getCommunityRequestSubView = () => {
     if (type === CommunityRequestType.COURSE) {
@@ -54,7 +80,7 @@ const CommunityRequestDetails = (props: CommunityRequestProps) => {
           <HStack spacing={1}>
             <Badge colorScheme="green" variant="solid">{state}</Badge>
             <Text fontSize="md" fontWeight="semibold">
-              {user.name}
+              {communityRequest.user.name}
             </Text>
             <Text fontSize="md">
               wants to integrate a new
@@ -67,13 +93,20 @@ const CommunityRequestDetails = (props: CommunityRequestProps) => {
 
         {getCommunityRequestSubView()}
 
-        <CommonFooterView user={user} approves={approves} />
+        <CommonFooterView
+          user={communityRequest.user}
+          approves={communityRequest.approves}
+          currentUser={currentUser}
+          handleApprove={handleCommunityRequestApprove}
+        />
 
       </Stack>
 
     </SidebarWithHeader>
   );
 };
+
+// TODO: Verify probably the performance can be improved with getInitialProps
 
 export const getServerSideProps = withPageAuthRequired({
   async getServerSideProps({ req, query: { communityRequestId } }) {
@@ -87,7 +120,7 @@ export const getServerSideProps = withPageAuthRequired({
 
     return {
       props: {
-        communityRequest,
+        communityRequestInitialData: communityRequest,
       },
     };
   },

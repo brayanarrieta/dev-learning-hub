@@ -17,8 +17,11 @@ import { CommunityRequest } from '../../types';
 import { COMMUNITY_REQUEST_APPROVES_REQUIRED } from '../../constants/config';
 import { getCommunityRequestURL } from '../../constants/pageURLs';
 
+interface CommunityRequestComposed extends Omit<CommunityRequest, 'approves'> {
+  approves: string[];
+}
 interface CommunityRequestCardProps {
-    communityRequest: CommunityRequest,
+    communityRequest: CommunityRequestComposed,
 }
 
 const CommunityRequestCard = ({
@@ -28,7 +31,7 @@ const CommunityRequestCard = ({
     title, type, user, approves,
   } = communityRequest;
 
-  const isCommunityRequestApproved = COMMUNITY_REQUEST_APPROVES_REQUIRED === approves?.length;
+  const isCommunityRequestApproved = approves.length >= COMMUNITY_REQUEST_APPROVES_REQUIRED;
 
   const getRemainingApprovesMessage = () => {
     if (!isCommunityRequestApproved && approves) {

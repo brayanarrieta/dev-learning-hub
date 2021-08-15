@@ -26,7 +26,7 @@ export enum CommunityRequestType {
 }
 
 export enum CommunityRequestState {
-    REVIEW ='Review',
+    WAITING_REVIEW ='Waiting Review',
     MERGED ='Merged',
     CLOSED = 'Closed',
     REJECTED = 'Rejected',

@@ -22,11 +22,12 @@ const CommunityRequestModel = new mongoose.Schema({
   approves: {
     type: [String],
     default: [],
+    uniqueItems: true,
   },
   state: {
     type: String,
     enum: Object.values(CommunityRequestState),
-    default: CommunityRequestState.REVIEW,
+    default: CommunityRequestState.WAITING_REVIEW,
   },
 },
 {

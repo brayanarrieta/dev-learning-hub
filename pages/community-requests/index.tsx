@@ -9,7 +9,7 @@ import {
 import Router from 'next/router';
 import React from 'react';
 import Paginator from '../../components/Paginator';
-import { GET_API_COMMUNITY_REQUESTS } from '../../constants/apiURLs';
+import { BASE_API_COMMUNITY_REQUESTS } from '../../constants/apiURLs';
 import { GET_COMMUNITY_REQUESTS_WITH_PAGINATION_PAGE_SIZE, PAGINATION_DEFAULT_INITIAL_PAGE } from '../../constants/config';
 import { COMMUNITY_REQUESTS_PAGE_URL, CREATE_COMMUNITY_REQUESTS_PAGE_URL } from '../../constants/pageURLs';
 import CommunityRequestCard from '../../custom-components/CommunityRequests/CommunityRequestCard';
@@ -73,7 +73,7 @@ const CommunityRequests = (props: CommunityRequestsProps) => {
 export const getServerSideProps = withPageAuthRequired({
   async getServerSideProps({ req, query: { page = PAGINATION_DEFAULT_INITIAL_PAGE } }) {
     const { data } = await makeRequest({
-      url: GET_API_COMMUNITY_REQUESTS,
+      url: BASE_API_COMMUNITY_REQUESTS,
       method: 'GET',
       headers: { Cookie: req.headers.cookie },
       params: { page },

@@ -1,8 +1,8 @@
 import { withApiAuthRequired } from '@auth0/nextjs-auth0';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { HTTP_METHODS } from '../../../constants/enums';
-import dbConnect from '../../../database/dbConnect';
-import { getCommunityRequestById } from '../../../services/communityRequestsService';
+import { HTTP_METHODS } from '../../../../constants/enums';
+import dbConnect from '../../../../database/dbConnect';
+import { getCommunityRequestById } from '../../../../services/communityRequestsService';
 
 const handler = withApiAuthRequired(async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;

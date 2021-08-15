@@ -2,7 +2,11 @@
 import { PAGINATION_DEFAULT_INITIAL_PAGE, GET_COMMUNITY_REQUESTS_WITH_PAGINATION_PAGE_SIZE } from '../constants/config';
 import { CommunityRequestType } from '../constants/enums';
 import {
-  createCommunityRequestDal, getCommunityRequestByIdDal, getCommunityRequestsCountDal, getCommunityRequestsWithPaginationDal,
+  approveCommunityRequestDal,
+  createCommunityRequestDal,
+  getCommunityRequestByIdDal,
+  getCommunityRequestsCountDal,
+  getCommunityRequestsWithPaginationDal,
 } from '../dal/communityRequestRepository';
 import { convertToNumber } from '../helpers/convertTypes';
 import { CommunityRequest } from '../types';
@@ -46,3 +50,7 @@ export const getCommunityRequestById = async (communityRequestId: any) => {
 
   return communityRequestData;
 };
+
+export const approveCommunityRequest = async (
+  communityRequestId: any, userEmail: string,
+) => approveCommunityRequestDal(communityRequestId, userEmail);

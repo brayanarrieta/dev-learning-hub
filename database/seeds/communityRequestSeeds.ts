@@ -14,7 +14,7 @@ const COMMUNITY_REQUEST_SEEDS: CommunityRequest[] = [
       email: 'brayan.arrieta.alfaro.96@gmail.com',
     },
     approves: [],
-    state: CommunityRequestState.REVIEW,
+    state: CommunityRequestState.WAITING_REVIEW,
   },
 
 ];

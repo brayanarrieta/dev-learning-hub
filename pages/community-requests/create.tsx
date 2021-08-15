@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { POST_API_COMMUNITY_REQUESTS } from '../../constants/apiURLs';
+import { BASE_API_COMMUNITY_REQUESTS } from '../../constants/apiURLs';
 import { CommunityRequestType, HTTP_METHODS } from '../../constants/enums';
 import CodeSnippetForm from '../../custom-components/CommunityRequests/Forms/CodeSnippetForm';
 import CommonForm from '../../custom-components/CommunityRequests/Forms/CommonForm';
@@ -41,7 +41,7 @@ const CommunityRequestsAdd = ({ user }: CommunityRequestsAddProps) => {
 
     const { data } = await makeRequest({
       method: HTTP_METHODS.POST,
-      url: POST_API_COMMUNITY_REQUESTS,
+      url: BASE_API_COMMUNITY_REQUESTS,
       data: communityRequest,
     });
 
@@ -49,7 +49,7 @@ const CommunityRequestsAdd = ({ user }: CommunityRequestsAddProps) => {
 
     toast({
       title: success ? 'The community request was created successfully' : 'Something when wrong processing the community request',
-      status: 'success',
+      status: success ? 'success' : 'error',
       duration: 9000,
       isClosable: true,
     });

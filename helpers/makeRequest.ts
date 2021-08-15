@@ -15,4 +15,18 @@ interface MakeRequestParams {
   data?: any;
 }
 
-export const makeRequest = async (params: MakeRequestParams) => axiosInstance.request(params);
+const DEFAULT_ERROR_MESSAGE = 'Something went wrong';
+
+export const makeRequest = async (params: MakeRequestParams) => {
+  try {
+    const { data } = await axiosInstance.request(params);
+    return { data, error: null };
+  } catch (err) {
+    return {
+      data: { success: false },
+      error: {
+        message: DEFAULT_ERROR_MESSAGE,
+      },
+    };
+  }
+};

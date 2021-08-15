@@ -15,14 +15,16 @@ interface CommonFooterViewProps {
         email: string;
     };
     approves: any;
+    handleApprove: any;
+    currentUser: any;
 }
 
 const CommonFooterView = (props: CommonFooterViewProps) => {
-  const { user, approves } = props;
+  const {
+    user, approves, handleApprove, currentUser,
+  } = props;
 
-  const { user: currentUser } = useUser();
-
-  const isCommunityRequestApproved = COMMUNITY_REQUEST_APPROVES_REQUIRED === approves?.length;
+  const isCommunityRequestApproved = approves.length >= COMMUNITY_REQUEST_APPROVES_REQUIRED;
 
   const isTheRequestOwner = user.email === currentUser?.email;
 
@@ -87,6 +89,7 @@ const CommonFooterView = (props: CommonFooterViewProps) => {
             }}
             rightIcon={<FiPlus />}
             disabled={!isEnableToApprove}
+            onClick={handleApprove}
           >
             Approve the Community Request
           </Button>
