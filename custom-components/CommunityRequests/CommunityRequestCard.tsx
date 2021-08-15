@@ -7,10 +7,15 @@ import {
   Icon,
   Badge,
   Stack,
+  Link,
+  Button,
 } from '@chakra-ui/react';
 import { FiUserCheck } from 'react-icons/fi';
+import { ExternalLinkIcon } from '@chakra-ui/icons';
+import Router from 'next/router';
 import { CommunityRequest } from '../../types';
 import { COMMUNITY_REQUEST_APPROVES_REQUIRED } from '../../constants/config';
+import { getCommunityRequestURL } from '../../constants/pageURLs';
 
 interface CommunityRequestCardProps {
     communityRequest: CommunityRequest,
@@ -48,7 +53,18 @@ const CommunityRequestCard = ({
       justifyContent="space-between"
     >
       <Box>
-        <Text fontSize={{ base: 'md', md: 'lg' }} fontWeight="semibold">{title}</Text>
+        <Text fontSize={{ base: 'md', md: 'lg' }} fontWeight="semibold">
+
+          <Button
+            onClick={() => Router.push(getCommunityRequestURL(communityRequest._id))}
+            variant="link"
+            colorScheme="black"
+          >
+            {title}
+            <ExternalLinkIcon ml={2} />
+          </Button>
+
+        </Text>
         <Stack direction={['column', 'column', 'row']} mt={2} spacing={2}>
 
           { user?.name && (

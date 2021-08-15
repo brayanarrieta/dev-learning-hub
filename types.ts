@@ -23,9 +23,9 @@ export interface Technology {
 
 export interface InterviewQuestion {
     _id?: string;
-    question: string,
-    answer: string,
-    technology?: string,
+    question: string;
+    answer: string;
+    technology?: string;
 }
 
 export interface CodeSnippet {
@@ -33,15 +33,15 @@ export interface CodeSnippet {
     title: string;
     description: string;
     content: string;
-    technology?: string,
+    technology?: string;
 }
 export interface CommunityRequest {
     _id?: string;
     title: string;
-    type: CommunityRequestType
+    type: CommunityRequestType;
     user: {
-        name: string,
-        email: string,
+        name: string;
+        email: string;
     }
     descriptionData: any;
     state?: CommunityRequestState;

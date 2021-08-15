@@ -13,3 +13,5 @@ export const CREATE_COMMUNITY_REQUESTS_PAGE_URL = `${COMMUNITY_REQUESTS_PAGE_URL
 export const getTechnologyInterviewQuestionsURL = (slug: string) => `${INTERVIEW_QUESTIONS_PAGE_URL}/technology/${slug}`;
 
 export const getCodeSnippetURLById = (id: any) => `${CODE_SNIPPETS_PAGE_URL}/${id}`;
+
+export const getCommunityRequestURL = (id: any) => `${COMMUNITY_REQUESTS_PAGE_URL}/${id}`;

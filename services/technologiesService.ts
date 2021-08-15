@@ -3,6 +3,7 @@ import {
   getTechnologiesCountDal,
   getTechnologiesDal,
   getTechnologiesWithPaginationDal,
+  getTechnologyByIdDal,
   getTechnologyBySlugDal,
 } from '../dal/technologyRepository';
 import { convertToNumber } from '../helpers/convertTypes';
@@ -24,3 +25,5 @@ export const getTechnologiesWithPagination = async (currentPage: any) => {
 export const getTechnologies = async () => getTechnologiesDal();
 
 export const getTechnologyBySlug = async (slug: any) => getTechnologyBySlugDal(slug);
+
+export const getTechnologyById = async (id: any) => getTechnologyByIdDal(id);

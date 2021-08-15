@@ -23,3 +23,7 @@ export const getCommunityRequestsWithPaginationDal = async (
 export const createCommunityRequestDal = async (
   communityRequest: any,
 ) => CommunityRequest.create(communityRequest);
+
+export const getCommunityRequestByIdDal = async (
+  communityRequestId: string,
+) => CommunityRequest.findById(communityRequestId);
