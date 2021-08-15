@@ -6,6 +6,7 @@ import {
   HStack,
   Icon,
   Badge,
+  Stack,
 } from '@chakra-ui/react';
 import { FiUserCheck } from 'react-icons/fi';
 import { CommunityRequest } from '../../types';
@@ -15,7 +16,6 @@ interface CommunityRequestCardProps {
     communityRequest: CommunityRequest,
 }
 
-// TODO: Fix issue with responsive UI
 const CommunityRequestCard = ({
   communityRequest,
 }: CommunityRequestCardProps) => {
@@ -36,7 +36,8 @@ const CommunityRequestCard = ({
   };
 
   return (
-    <HStack
+    <Stack
+      direction={['column', 'row', 'row']}
       p={4}
       bg={useColorModeValue('white', 'gray.800')}
       borderRadius="lg"
@@ -48,16 +49,17 @@ const CommunityRequestCard = ({
     >
       <Box>
         <Text fontSize={{ base: 'md', md: 'lg' }} fontWeight="semibold">{title}</Text>
-        <HStack mt={2} spacing={1}>
+        <Stack direction={['column', 'column', 'row']} mt={2} spacing={2}>
 
           { user?.name && (
-          <>
+          <HStack spacing={1}>
             <Text fontSize="sm" color="gray.600">Created by</Text>
             <Text fontSize="sm" color="gray.600" fontWeight="semibold">{user.name}</Text>
-          </>
+          </HStack>
           )}
-          <Badge colorScheme="teal" variant="outline">{type}</Badge>
-        </HStack>
+          <Box><Badge colorScheme="teal" variant="outline">{type}</Badge></Box>
+
+        </Stack>
       </Box>
 
       <HStack spacing={2}>
@@ -73,7 +75,7 @@ const CommunityRequestCard = ({
 
       </HStack>
 
-    </HStack>
+    </Stack>
   );
 };
 
