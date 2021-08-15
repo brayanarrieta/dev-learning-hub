@@ -17,7 +17,7 @@ import { CommunityRequest } from '../../types';
 import { COMMUNITY_REQUEST_APPROVES_REQUIRED } from '../../constants/config';
 import { getCommunityRequestURL } from '../../constants/pageURLs';
 
-interface CommunityRequestComposed extends Omit<CommunityRequest, 'approves'> {
+export interface CommunityRequestComposed extends Omit<CommunityRequest, 'approves'> {
   approves: string[];
 }
 interface CommunityRequestCardProps {

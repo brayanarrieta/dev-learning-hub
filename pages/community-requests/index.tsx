@@ -12,7 +12,7 @@ import Paginator from '../../components/Paginator';
 import { BASE_API_COMMUNITY_REQUESTS } from '../../constants/apiURLs';
 import { GET_COMMUNITY_REQUESTS_WITH_PAGINATION_PAGE_SIZE, PAGINATION_DEFAULT_INITIAL_PAGE } from '../../constants/config';
 import { COMMUNITY_REQUESTS_PAGE_URL, CREATE_COMMUNITY_REQUESTS_PAGE_URL } from '../../constants/pageURLs';
-import CommunityRequestCard from '../../custom-components/CommunityRequests/CommunityRequestCard';
+import CommunityRequestCard, { CommunityRequestComposed } from '../../custom-components/CommunityRequests/CommunityRequestCard';
 import SidebarWithHeader from '../../custom-components/Layout/SidebarWithHeader';
 import { convertToNumber } from '../../helpers/convertTypes';
 import { makeRequest } from '../../helpers/makeRequest';
@@ -51,7 +51,10 @@ const CommunityRequests = (props: CommunityRequestsProps) => {
 
         <SimpleGrid columns={1} spacing={2}>
           {communityRequests.map((communityRequest: CommunityRequest) => (
-            <CommunityRequestCard key={communityRequest._id} communityRequest={communityRequest} />
+            <CommunityRequestCard
+              key={communityRequest._id}
+              communityRequest={communityRequest as CommunityRequestComposed}
+            />
           ))}
         </SimpleGrid>
 
