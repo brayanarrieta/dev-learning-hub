@@ -19,3 +19,7 @@ export const getInterviewQuestionsCountByTechnologyIdDal = async (technologyId: 
   const count = await InterviewQuestion.find({ technology: technologyId }).countDocuments();
   return count;
 };
+
+export const createInterviewQuestionDal = async (
+  interviewQuestion: any,
+) => InterviewQuestion.create(interviewQuestion);

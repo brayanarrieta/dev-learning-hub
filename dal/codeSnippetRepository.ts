@@ -17,3 +17,7 @@ export const getCodeSnippetsWithPaginationDal = async (currentPage: number, page
     .limit(pageSize);
   return codeSnippets;
 };
+
+export const createCodeSnippetDal = async (
+  codeSnippet: any,
+) => CodeSnippet.create(codeSnippet);

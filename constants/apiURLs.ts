@@ -19,3 +19,7 @@ export const getAPICommunityRequestById = (
 export const postAPIApproveCommunityRequest = (
   communityRequestId: any,
 ) => `${BASE_API_COMMUNITY_REQUESTS}/${communityRequestId}/approve`;
+
+export const postAPIMergeCommunityRequest = (
+  communityRequestId: any,
+) => `${BASE_API_COMMUNITY_REQUESTS}/${communityRequestId}/merge`;

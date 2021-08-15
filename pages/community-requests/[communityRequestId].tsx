@@ -1,17 +1,14 @@
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import {
-  Badge,
-  Heading,
-  HStack,
   Stack,
-  Text,
   useToast,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
-import { getAPICommunityRequestById, postAPIApproveCommunityRequest } from '../../constants/apiURLs';
+import { getAPICommunityRequestById, postAPIApproveCommunityRequest, postAPIMergeCommunityRequest } from '../../constants/apiURLs';
 import { CommunityRequestType, HTTP_METHODS } from '../../constants/enums';
-import CommonFooterView from '../../custom-components/CommunityRequests/Views/CommonFooterView';
-import CourseView from '../../custom-components/CommunityRequests/Views/CourseView';
+import Header from '../../custom-components/CommunityRequests/ViewCommunityRequest/Header';
+import CommonFooterView from '../../custom-components/CommunityRequests/ViewCommunityRequest/Views/CommonFooterView';
+import CourseView from '../../custom-components/CommunityRequests/ViewCommunityRequest/Views/CourseView';
 import SidebarWithHeader from '../../custom-components/Layout/SidebarWithHeader';
 import { makeRequest } from '../../helpers/makeRequest';
 import { CommunityRequest } from '../../types';
@@ -27,7 +24,7 @@ const CommunityRequestDetails = (props: CommunityRequestProps) => {
   const [communityRequest, setCommunityRequest] = useState(communityRequestInitialData);
 
   const {
-    title, type, descriptionData, state,
+    type, descriptionData, state,
   } = communityRequest;
 
   const toast = useToast();
@@ -44,6 +41,27 @@ const CommunityRequestDetails = (props: CommunityRequestProps) => {
     if (success) {
       const { communityRequestApproves } = data;
       setCommunityRequest({ ...communityRequestInitialData, approves: communityRequestApproves });
+    }
+
+    toast({
+      title: success ? 'The community request was approved successfully' : 'Something when wrong processing the community request approve',
+      status: success ? 'success' : 'error',
+      duration: 3000,
+      isClosable: true,
+    });
+  };
+
+  const handleCommunityRequestMerge = async () => {
+    const { data } = await makeRequest({
+      method: HTTP_METHODS.POST,
+      url: postAPIMergeCommunityRequest(communityRequest._id),
+      data: { userEmail: currentUser.email },
+    });
+
+    const { success } = data;
+
+    if (success) {
+      setCommunityRequest({ ...communityRequestInitialData, ...data.communityRequest });
     }
 
     toast({
@@ -74,22 +92,12 @@ const CommunityRequestDetails = (props: CommunityRequestProps) => {
 
       <Stack spacing={4}>
 
-        <Stack spacing={2}>
-          <Heading>{title}</Heading>
-
-          <HStack spacing={1}>
-            <Badge colorScheme="green" variant="solid">{state}</Badge>
-            <Text fontSize="md" fontWeight="semibold">
-              {communityRequest.user.name}
-            </Text>
-            <Text fontSize="md">
-              wants to integrate a new
-            </Text>
-            <Text fontSize="md" fontWeight="semibold">
-              {type}
-            </Text>
-          </HStack>
-        </Stack>
+        <Header
+          type={type}
+          title={communityRequest.title}
+          state={state}
+          userName={communityRequest.user.name}
+        />
 
         {getCommunityRequestSubView()}
 
@@ -98,6 +106,8 @@ const CommunityRequestDetails = (props: CommunityRequestProps) => {
           approves={communityRequest.approves}
           currentUser={currentUser}
           handleApprove={handleCommunityRequestApprove}
+          handleMerge={handleCommunityRequestMerge}
+          state={state}
         />
 
       </Stack>

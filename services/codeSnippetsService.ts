@@ -1,6 +1,5 @@
-/* eslint-disable import/prefer-default-export */
 import { PAGINATION_DEFAULT_INITIAL_PAGE, GET_CODE_SNIPPETS_WITH_PAGINATION_PAGE_SIZE } from '../constants/config';
-import { getCodeSnippetsCountDal, getCodeSnippetsWithPaginationDal } from '../dal/codeSnippetRepository';
+import { createCodeSnippetDal, getCodeSnippetsCountDal, getCodeSnippetsWithPaginationDal } from '../dal/codeSnippetRepository';
 import { convertToNumber } from '../helpers/convertTypes';
 
 export const getCodeSnippetsWithPagination = async (currentPage: any) => {
@@ -16,3 +15,7 @@ export const getCodeSnippetsWithPagination = async (currentPage: any) => {
     codeSnippetsCount,
   };
 };
+
+export const createCodeSnippet = async (
+  codeSnippet: any,
+) => createCodeSnippetDal(codeSnippet);

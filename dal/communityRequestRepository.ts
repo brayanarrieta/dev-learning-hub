@@ -39,3 +39,11 @@ export const approveCommunityRequestDal = async (
   { $addToSet: { approves: userEmail } },
   { returnOriginal: false },
 );
+
+export const mergeCommunityRequestDal = async (
+  communityRequestId: any,
+) => CommunityRequest.findOneAndUpdate(
+  { _id: communityRequestId },
+  { state: CommunityRequestState.MERGED },
+  { returnOriginal: false },
+);

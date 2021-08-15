@@ -4,7 +4,7 @@ import {
   SimpleGrid, Stack, useColorModeValue, Text, Link,
 } from '@chakra-ui/react';
 import React from 'react';
-import FieldView from '../../../components/FieldView';
+import FieldView from '../../../../components/FieldView';
 
 interface CourseViewProps {
     descriptionData: any;

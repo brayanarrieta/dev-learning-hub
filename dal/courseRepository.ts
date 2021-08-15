@@ -15,3 +15,7 @@ export const getCoursesWithPaginationDal = async (currentPage: number, pageSize:
 export const bulkInsertCourses = async (courses: any) => Course.insertMany(courses);
 
 export const truncateCourses = async () => Course.deleteMany();
+
+export const createCourseDal = async (
+  course: any,
+) => Course.create(course);
