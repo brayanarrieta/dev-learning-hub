@@ -23,12 +23,12 @@ const CommunityRequestCard = ({
     title, type, user, approves,
   } = communityRequest;
 
-  const isCommunityRequestApproved = COMMUNITY_REQUEST_APPROVES_REQUIRED === approves.length;
+  const isCommunityRequestApproved = COMMUNITY_REQUEST_APPROVES_REQUIRED === approves?.length;
 
   const getRemainingApprovesMessage = () => {
-    if (!isCommunityRequestApproved) {
+    if (!isCommunityRequestApproved && approves) {
       return (
-        <Text fontWeight="semibold">{`${COMMUNITY_REQUEST_APPROVES_REQUIRED - approves.length} left`}</Text>
+        <Text fontWeight="semibold">{`${COMMUNITY_REQUEST_APPROVES_REQUIRED - approves?.length} left`}</Text>
       );
     }
 
