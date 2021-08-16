@@ -8,7 +8,7 @@ import { IoMdPeople } from 'react-icons/io';
 import { BiGitMerge } from 'react-icons/bi';
 import { COMMUNITY_REQUEST_APPROVES_REQUIRED } from '../../../../constants/config';
 import { CommunityRequestState } from '../../../../constants/enums';
-import CommunityRequestStateSection from './CommunityRequestStateSection';
+import CommunityRequestStateSection from '../CommunityRequestStateSection';
 
 interface CommonFooterViewProps {
     user: {

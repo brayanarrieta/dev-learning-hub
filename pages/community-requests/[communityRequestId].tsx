@@ -7,8 +7,10 @@ import React, { useState } from 'react';
 import { getAPICommunityRequestById, postAPIApproveCommunityRequest, postAPIMergeCommunityRequest } from '../../constants/apiURLs';
 import { CommunityRequestType, HTTP_METHODS } from '../../constants/enums';
 import Header from '../../custom-components/CommunityRequests/ViewCommunityRequest/Header';
+import CodeSnippetView from '../../custom-components/CommunityRequests/ViewCommunityRequest/Views/CodeSnippetView';
 import CommonFooterView from '../../custom-components/CommunityRequests/ViewCommunityRequest/Views/CommonFooterView';
 import CourseView from '../../custom-components/CommunityRequests/ViewCommunityRequest/Views/CourseView';
+import InterviewQuestionView from '../../custom-components/CommunityRequests/ViewCommunityRequest/Views/InterviewQuestionView';
 import SidebarWithHeader from '../../custom-components/Layout/SidebarWithHeader';
 import { makeRequest } from '../../helpers/makeRequest';
 import { CommunityRequest } from '../../types';
@@ -81,13 +83,12 @@ const CommunityRequestDetails = (props: CommunityRequestProps) => {
     if (type === CommunityRequestType.COURSE) {
       return <CourseView descriptionData={descriptionData} />;
     }
-    // if (type === CommunityRequestType.INTERVIEW_QUESTION) {
-
-    // }
-
-    // if (type === CommunityRequestType.CODE_SNIPPET) {
-
-    // }
+    if (type === CommunityRequestType.INTERVIEW_QUESTION) {
+      return <InterviewQuestionView descriptionData={descriptionData} />;
+    }
+    if (type === CommunityRequestType.CODE_SNIPPET) {
+      return <CodeSnippetView descriptionData={descriptionData} />;
+    }
 
     return null;
   };

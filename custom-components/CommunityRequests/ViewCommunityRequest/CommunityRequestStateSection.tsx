@@ -1,8 +1,8 @@
 import { HStack, Icon, Text } from '@chakra-ui/react';
 import React, { memo } from 'react';
 import { FiUserCheck, FiUserX } from 'react-icons/fi';
-import { COMMUNITY_REQUEST_APPROVES_REQUIRED } from '../../../../constants/config';
-import { CommunityRequestState } from '../../../../constants/enums';
+import { COMMUNITY_REQUEST_APPROVES_REQUIRED } from '../../../constants/config';
+import { CommunityRequestState } from '../../../constants/enums';
 
 interface CommunityRequestStateSectionProps {
     state: any;
