@@ -1,6 +1,3 @@
-import {
-  createCodeSnippet, createCourse, createInterviewQuestion, getTechnologyById,
-} from '.';
 import { PAGINATION_DEFAULT_INITIAL_PAGE, GET_COMMUNITY_REQUESTS_WITH_PAGINATION_PAGE_SIZE, COMMUNITY_REQUEST_APPROVES_REQUIRED } from '../constants/config';
 import { CommunityRequestType } from '../constants/enums';
 import {
@@ -13,6 +10,10 @@ import {
 } from '../dal/communityRequestRepository';
 import { convertToNumber } from '../helpers/convertTypes';
 import { CommunityRequest } from '../types';
+import { createCodeSnippet } from './codeSnippetsService';
+import { createCourse } from './courseService';
+import { createInterviewQuestion } from './interviewQuestionService';
+import { getTechnologyById } from './technologiesService';
 
 export const getCommunityRequestsWithPagination = async (currentPage: any) => {
   const page = currentPage ? convertToNumber(currentPage) : PAGINATION_DEFAULT_INITIAL_PAGE;
