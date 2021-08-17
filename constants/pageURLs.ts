@@ -9,9 +9,12 @@ export const INTERVIEW_QUESTIONS_PAGE_URL = '/interview-questions';
 export const CODE_SNIPPETS_PAGE_URL = '/code-snippets';
 export const COMMUNITY_REQUESTS_PAGE_URL = '/community-requests';
 export const CREATE_COMMUNITY_REQUESTS_PAGE_URL = `${COMMUNITY_REQUESTS_PAGE_URL}/create`;
+export const QUIZ_INTERVIEW_PAGE_URL = '/quiz-interview';
 
 export const getTechnologyInterviewQuestionsURL = (slug: string) => `${INTERVIEW_QUESTIONS_PAGE_URL}/technology/${slug}`;
 
 export const getCodeSnippetURLById = (id: any) => `${CODE_SNIPPETS_PAGE_URL}/${id}`;
 
 export const getCommunityRequestURL = (id: any) => `${COMMUNITY_REQUESTS_PAGE_URL}/${id}`;
+
+export const getQuizInterviewQuestionsByIdURL = (id: any) => `${QUIZ_INTERVIEW_PAGE_URL}/technology/${id}`;
