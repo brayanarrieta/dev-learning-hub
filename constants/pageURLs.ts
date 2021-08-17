@@ -17,4 +17,4 @@ export const getCodeSnippetURLById = (id: any) => `${CODE_SNIPPETS_PAGE_URL}/${i
 
 export const getCommunityRequestURL = (id: any) => `${COMMUNITY_REQUESTS_PAGE_URL}/${id}`;
 
-export const getQuizInterviewQuestionsByIdURL = (id: any) => `${QUIZ_INTERVIEW_PAGE_URL}/technology/${id}`;
+export const getQuizInterviewQuestionsBySlugURL = (slug: any) => `${QUIZ_INTERVIEW_PAGE_URL}/technology/${slug}`;

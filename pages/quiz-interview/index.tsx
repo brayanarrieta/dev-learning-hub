@@ -6,7 +6,7 @@ import React from 'react';
 import Paginator from '../../components/Paginator';
 import { GET_API_TECHNOLOGIES } from '../../constants/apiURLs';
 import { GET_TECHNOLOGIES_WITH_PAGINATION_PAGE_SIZE, PAGINATION_DEFAULT_INITIAL_PAGE } from '../../constants/config';
-import { getQuizInterviewQuestionsByIdURL, QUIZ_INTERVIEW_PAGE_URL } from '../../constants/pageURLs';
+import { getQuizInterviewQuestionsBySlugURL, QUIZ_INTERVIEW_PAGE_URL } from '../../constants/pageURLs';
 import SidebarWithHeader from '../../custom-components/Layout/SidebarWithHeader';
 import TechnologyCard from '../../custom-components/TechnologyCard';
 import { convertToNumber } from '../../helpers/convertTypes';
@@ -36,7 +36,7 @@ const QuizInterview = (props: QuizInterviewProps) => {
               key={technology._id}
               technology={technology}
               buttonText={`Go to the ${technology.name} quiz`}
-              buttonLink={getQuizInterviewQuestionsByIdURL(technology._id)}
+              buttonLink={getQuizInterviewQuestionsBySlugURL(technology.slug)}
             />
           ))}
         </SimpleGrid>
