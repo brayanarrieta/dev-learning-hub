@@ -47,3 +47,13 @@ export interface CommunityRequest {
     state?: CommunityRequestState;
     approves?: string[];
 }
+export interface QuizQuestionAnswer {
+    answer: string;
+    isCorrect: boolean;
+}
+export interface QuizQuestion {
+    _id?: string;
+    question: string;
+    answers: QuizQuestionAnswer[];
+    technology?: string;
+}

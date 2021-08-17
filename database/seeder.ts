@@ -4,12 +4,14 @@ import { bulkInsertCodeSnippetsDal, truncateCodeSnippetsDal } from '../dal/codeS
 import { bulkInsertCommunityRequestDal, truncateCommunityRequestDal } from '../dal/communityRequestRepository';
 import { bulkInsertCourses, truncateCourses } from '../dal/courseRepository';
 import { bulkInterviewQuestions, truncateInterviewQuestions } from '../dal/interviewQuestionRepository';
+import { bulkInsertQuizQuestionsDal, truncateQuizQuestionsDal } from '../dal/quizQuestionRepository';
 import { bulkInsertTechnologies, truncateTechnologies } from '../dal/technologyRepository';
 import { Technology } from '../types';
 import CODE_SNIPPETS_SEEDS from './seeds/codeSnippetsSeeds';
 import COMMUNITY_REQUEST_SEEDS from './seeds/communityRequestSeeds';
 import COURSES_SEEDS from './seeds/coursesSeeds';
 import INTERVIEW_QUESTIONS_SEEDS from './seeds/interviewQuestions';
+import QUIZ_QUESTIONS_SEEDS from './seeds/quizQuestionsSeeds';
 import TECHNOLOGIES_SEEDS from './seeds/technologiesSeeds';
 
 dotenv.config({
@@ -22,6 +24,7 @@ const truncate = async () => {
   await truncateInterviewQuestions();
   await truncateCodeSnippetsDal();
   await truncateCommunityRequestDal();
+  await truncateQuizQuestionsDal();
 };
 
 const importData = async () => {
@@ -52,6 +55,18 @@ const importData = async () => {
   );
 
   await bulkInsertCommunityRequestDal(COMMUNITY_REQUEST_SEEDS);
+
+  await Promise.all(
+    technologies.map(async (
+      technology: Technology,
+    ) => {
+      const quizQuestions = (QUIZ_QUESTIONS_SEEDS[technology.name] || []).map(
+        (i) => ({ ...i, technology: technology._id }),
+      );
+
+      return bulkInsertQuizQuestionsDal(quizQuestions);
+    }),
+  );
 };
 
 const seeder = async () => {
