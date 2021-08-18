@@ -12,6 +12,8 @@ export const GET_API_CODE_SNIPPETS = '/api/code-snippets';
 
 export const BASE_API_COMMUNITY_REQUESTS = '/api/community-requests';
 
+export const BASE_API_QUIZ_INTERVIEW_QUESTIONS = '/api/quiz-interviews';
+
 export const getAPICommunityRequestById = (
   communityRequestId: any,
 ) => `${BASE_API_COMMUNITY_REQUESTS}/${communityRequestId}`;
@@ -23,3 +25,7 @@ export const postAPIApproveCommunityRequest = (
 export const postAPIMergeCommunityRequest = (
   communityRequestId: any,
 ) => `${BASE_API_COMMUNITY_REQUESTS}/${communityRequestId}/merge`;
+
+export const getAPIQuizInterviewQuestionsById = (
+  technologyId: any,
+) => `${BASE_API_QUIZ_INTERVIEW_QUESTIONS}/technology/${technologyId}`;
