@@ -36,6 +36,7 @@ const QUIZ_QUESTIONS_REACT_SEEDS: QuizQuestion[] = [
   MOCK_REACT_SEED,
   MOCK_REACT_SEED,
   MOCK_REACT_SEED,
+  MOCK_REACT_SEED,
 ];
 
 const QUIZ_QUESTIONS_SEEDS: { [key: string]: QuizQuestion[]} = {
