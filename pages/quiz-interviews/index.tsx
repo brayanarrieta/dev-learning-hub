@@ -8,7 +8,7 @@ import { GET_API_TECHNOLOGIES } from '../../constants/apiURLs';
 import { GET_TECHNOLOGIES_WITH_PAGINATION_PAGE_SIZE, PAGINATION_DEFAULT_INITIAL_PAGE } from '../../constants/config';
 import { getQuizInterviewQuestionsBySlugURL, QUIZ_INTERVIEW_PAGE_URL } from '../../constants/pageURLs';
 import SidebarWithHeader from '../../custom-components/Layout/SidebarWithHeader';
-import TechnologyCard from '../../custom-components/TechnologyCard';
+import QuizTechnologyCard from '../../custom-components/QuizInterview/QuizTechnologyCard';
 import { convertToNumber } from '../../helpers/convertTypes';
 import { makeRequest } from '../../helpers/makeRequest';
 import { Technology } from '../../types';
@@ -32,7 +32,7 @@ const QuizInterview = (props: QuizInterviewProps) => {
 
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={2}>
           {technologies.map((technology: Technology) => (
-            <TechnologyCard
+            <QuizTechnologyCard
               key={technology._id}
               technology={technology}
               buttonText={`Go to the ${technology.name} quiz`}
