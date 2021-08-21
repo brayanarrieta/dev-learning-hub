@@ -18,7 +18,6 @@ export interface TextAreaFormFieldProps {
       }
   }
 
-// TODO: Check this component are sharing logic of FormField component
 const TextAreaFormField = (props: TextAreaFormFieldProps) => {
   const {
     formControl, fieldName, defaultValue, fieldLabel, validationRules,

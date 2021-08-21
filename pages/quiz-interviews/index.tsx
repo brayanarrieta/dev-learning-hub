@@ -22,8 +22,6 @@ interface QuizInterviewProps {
 const QuizInterview = (props: QuizInterviewProps) => {
   const { technologies, technologiesCount, currentPage } = props;
 
-  // TODO: Change Technology Card remove description
-
   return (
     <SidebarWithHeader>
 

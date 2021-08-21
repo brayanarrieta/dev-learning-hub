@@ -8,7 +8,9 @@ export const bulkInsertCommunityRequestDal = async (
 export const truncateCommunityRequestDal = async () => CommunityRequest.deleteMany();
 
 export const getCommunityRequestsCountDal = async () => {
-  const count = await CommunityRequest.find().countDocuments();
+  const count = await CommunityRequest.find({
+    state: CommunityRequestState.WAITING_REVIEW,
+  }).countDocuments();
   return count;
 };
 

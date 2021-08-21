@@ -1,10 +1,12 @@
 import {
   Flex,
   Heading,
+  Icon,
   Stack,
 } from '@chakra-ui/react';
 import React from 'react';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
+import { FcEmptyFilter } from 'react-icons/fc';
 import { Course } from '../types';
 import SidebarWithHeader from '../custom-components/Layout/SidebarWithHeader';
 import CourseCard from '../custom-components/CourseCard';
@@ -14,14 +16,13 @@ import { convertToNumber } from '../helpers/convertTypes';
 import Paginator from '../components/Paginator';
 import { COURSES_PAGE_URL } from '../constants/pageURLs';
 import { PAGINATION_DEFAULT_INITIAL_PAGE, GET_COURSES_WITH_PAGINATION_PAGE_SIZE } from '../constants/config';
+import Banner from '../components/Banner';
 
 interface CoursesProps {
     courses: Course[],
     currentPage: number,
     coursesCount: number,
 }
-
-// TODO: Add code in the case that there aren't courses
 
 const Courses = (props: CoursesProps) => {
   const { courses, currentPage, coursesCount } = props;
@@ -31,11 +32,20 @@ const Courses = (props: CoursesProps) => {
       <Stack spacing={4}>
         <Heading>Free Online Courses</Heading>
 
-        <Stack
-          spacing={2}
-        >
-          {courses.map((course) => <CourseCard key={course._id} course={course} />)}
-        </Stack>
+        {
+          courses.length ? (
+            <Stack
+              spacing={2}
+            >
+              {courses.map((course) => <CourseCard key={course._id} course={course} />)}
+            </Stack>
+          ) : (
+            <Banner
+              icon={<Icon as={FcEmptyFilter} w={10} h={10} />}
+              text="There are no courses right now registered in the system."
+            />
+          )
+        }
 
         <Flex justifyContent="flex-end">
           <Paginator

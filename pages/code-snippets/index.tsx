@@ -1,8 +1,10 @@
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import {
-  Flex, Heading, SimpleGrid, Stack, useDisclosure,
+  Flex, Heading, Icon, SimpleGrid, Stack, useDisclosure,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
+import { FcEmptyFilter } from 'react-icons/fc';
+import Banner from '../../components/Banner';
 import Paginator from '../../components/Paginator';
 import { GET_API_CODE_SNIPPETS } from '../../constants/apiURLs';
 import { GET_CODE_SNIPPETS_WITH_PAGINATION_PAGE_SIZE, PAGINATION_DEFAULT_INITIAL_PAGE } from '../../constants/config';
@@ -49,15 +51,22 @@ const CodeSnippets = (props: CodeSnippetsProps) => {
 
         <Heading>Code Snippets</Heading>
 
-        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={2}>
-          {codeSnippets.map((codeSnippet: CodeSnippetComposed) => (
-            <CodeSnippetCard
-              key={codeSnippet._id}
-              codeSnippet={codeSnippet}
-              handleOpenCodeSnippetModal={handleOnOpenCodeSnippetModal}
-            />
-          ))}
-        </SimpleGrid>
+        {codeSnippets.length ? (
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={2}>
+            {codeSnippets.map((codeSnippet: CodeSnippetComposed) => (
+              <CodeSnippetCard
+                key={codeSnippet._id}
+                codeSnippet={codeSnippet}
+                handleOpenCodeSnippetModal={handleOnOpenCodeSnippetModal}
+              />
+            ))}
+          </SimpleGrid>
+        ) : (
+          <Banner
+            icon={<Icon as={FcEmptyFilter} w={10} h={10} />}
+            text="There are no code snippets right now registered in the system."
+          />
+        )}
 
         <Flex justifyContent="flex-end">
           <Paginator

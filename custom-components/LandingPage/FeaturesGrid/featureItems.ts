@@ -16,7 +16,7 @@ const FEATURE_ITEMS: Array<FeatureItem> = [
     icon: FcQuestions,
   },
   {
-    title: 'Quiz InterviewPractice',
+    title: 'Quiz Interview Practice',
     text: 'A simulator to improve your skills and prepare before your interviews with some common questions based on the community feedback.',
     icon: FcCollaboration,
   },

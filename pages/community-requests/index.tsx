@@ -3,11 +3,14 @@ import {
   Button,
   Flex,
   Heading,
+  Icon,
   SimpleGrid,
   Stack,
 } from '@chakra-ui/react';
 import Router from 'next/router';
 import React from 'react';
+import { FcEmptyFilter } from 'react-icons/fc';
+import Banner from '../../components/Banner';
 import Paginator from '../../components/Paginator';
 import { BASE_API_COMMUNITY_REQUESTS } from '../../constants/apiURLs';
 import { GET_COMMUNITY_REQUESTS_WITH_PAGINATION_PAGE_SIZE, PAGINATION_DEFAULT_INITIAL_PAGE } from '../../constants/config';
@@ -27,6 +30,7 @@ interface CommunityRequestsProps {
 
 const CommunityRequests = (props: CommunityRequestsProps) => {
   const { currentPage, communityRequests, communityRequestsCount } = props;
+
   return (
     <SidebarWithHeader>
 
@@ -49,14 +53,21 @@ const CommunityRequests = (props: CommunityRequestsProps) => {
           </Button>
         </Stack>
 
-        <SimpleGrid columns={1} spacing={2}>
-          {communityRequests.map((communityRequest: CommunityRequest) => (
-            <CommunityRequestCard
-              key={communityRequest._id}
-              communityRequest={communityRequest as CommunityRequestComposed}
-            />
-          ))}
-        </SimpleGrid>
+        {communityRequests.length ? (
+          <SimpleGrid columns={1} spacing={2}>
+            {communityRequests.map((communityRequest: CommunityRequest) => (
+              <CommunityRequestCard
+                key={communityRequest._id}
+                communityRequest={communityRequest as CommunityRequestComposed}
+              />
+            ))}
+          </SimpleGrid>
+        ) : (
+          <Banner
+            icon={<Icon as={FcEmptyFilter} w={10} h={10} />}
+            text="There are no community request right now registered in the system. Please return later to check."
+          />
+        )}
 
         <Flex justifyContent="flex-end">
           <Paginator

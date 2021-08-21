@@ -66,7 +66,8 @@ const CommunityRequestDetails = (props: CommunityRequestProps) => {
     const { success } = data;
 
     if (success) {
-      setCommunityRequest({ ...communityRequestInitialData, ...data.communityRequest });
+      const { state: newState } = data.communityRequest;
+      setCommunityRequest({ ...communityRequestInitialData, state: newState });
     }
 
     setIsMergingTheCommunityRequest(false);
@@ -122,8 +123,6 @@ const CommunityRequestDetails = (props: CommunityRequestProps) => {
     </SidebarWithHeader>
   );
 };
-
-// TODO: Verify probably the performance can be improved with getInitialProps
 
 export const getServerSideProps = withPageAuthRequired({
   async getServerSideProps({ req, query: { communityRequestId } }) {
