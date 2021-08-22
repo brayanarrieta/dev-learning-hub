@@ -22,7 +22,7 @@ const FEATURE_ITEMS: Array<FeatureItem> = [
   },
   {
     title: 'Code Snippet Collection',
-    text: 'A collection of developers code snippets of different technologies.',
+    text: 'A collection of developers\' code snippets of different technologies.',
     icon: FcFlashOn,
   },
   {
