@@ -7,20 +7,24 @@ import {
   AlertDialogFooter,
   Button,
   Text,
+  Icon,
+  Stack,
 } from '@chakra-ui/react';
 import Router from 'next/router';
 import React from 'react';
+import { FcFlashOn } from 'react-icons/fc';
 import { QUIZ_INTERVIEW_PAGE_URL } from '../../constants/pageURLs';
 
 interface QuizDialogResultProps {
     isOpen: boolean;
     onClose: any;
-    score: number;
+    totalAnswersCount: number;
+    correctAnswersCount: number;
 }
 
 const QuizDialogResult = (props:QuizDialogResultProps) => {
   const {
-    isOpen, onClose, score,
+    isOpen, onClose, correctAnswersCount, totalAnswersCount,
   } = props;
 
   const cancelRef = React.useRef<any>();
@@ -36,20 +40,32 @@ const QuizDialogResult = (props:QuizDialogResultProps) => {
     >
       <AlertDialogOverlay>
         <AlertDialogContent>
-          <AlertDialogHeader fontSize="lg" fontWeight="bold">
-            Quiz Result
+          <AlertDialogHeader>
+            <Text fontSize="md" fontWeight="semibold" textAlign="center" color="gray.500">
+              Congratulations
+            </Text>
+
+            <Text fontSize="2xl" fontWeight="bold" textAlign="center">
+              The Quiz was Completed!
+            </Text>
           </AlertDialogHeader>
 
           <AlertDialogBody>
+            <Stack alignItems="center" spacing={2}>
+              <Icon as={FcFlashOn} w={20} h={20} />
 
-            <Text fontSize={{ base: 'md', md: 'lg' }} fontWeight="semibold" textAlign="center">
-              {`The final score is ${score}`}
-            </Text>
+              <Text fontSize="md" fontWeight="semibold" color="gray.500">
+                You scored
+              </Text>
 
+              <Text fontSize="xl" fontWeight="bold" textAlign="center" color="green.500">
+                {`${correctAnswersCount}/${totalAnswersCount}`}
+              </Text>
+            </Stack>
           </AlertDialogBody>
 
           <AlertDialogFooter>
-            <Button colorScheme="teal" onClick={() => Router.push(QUIZ_INTERVIEW_PAGE_URL)} ml={3}>
+            <Button colorScheme="teal" onClick={() => Router.push(QUIZ_INTERVIEW_PAGE_URL)} w="full">
               Go to the Quiz Interview Page
             </Button>
           </AlertDialogFooter>

@@ -54,16 +54,16 @@ const TechnologyQuestions = (props: TechnologyQuestionsProps) => {
   };
 
   const getDialogResultModal = () => {
-    const correctAnswers = Object.values(
+    const correctAnswersCount = Object.values(
       quizAnswers,
     ).filter((i: QuizQuestionAnswer) => i.isCorrect).length;
-    const score = (correctAnswers / QUIZ_QUESTIONS_COUNT) * 100;
 
     return (
       <QuizDialogResult
         isOpen={isDialogResultOpen}
         onClose={() => setIsDialogResultOpen(false)}
-        score={score}
+        correctAnswersCount={correctAnswersCount}
+        totalAnswersCount={QUIZ_QUESTIONS_COUNT}
       />
     );
   };
