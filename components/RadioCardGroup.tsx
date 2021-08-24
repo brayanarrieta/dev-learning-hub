@@ -1,4 +1,4 @@
-import { useRadioGroup, VStack } from '@chakra-ui/react';
+import { HStack, useRadioGroup, VStack } from '@chakra-ui/react';
 import React from 'react';
 import RadioCard from './RadioCard';
 
@@ -23,16 +23,18 @@ const RadioCardGroup = (props: RadioCardGroupProps) => {
   const group = getRootProps();
 
   return (
-    <VStack {...group}>
-      {options.map(({ value, label }) => {
-        const radio = getRadioProps({ value });
-        return (
-          <RadioCard key={value} {...radio}>
-            {label}
-          </RadioCard>
-        );
-      })}
-    </VStack>
+    <HStack w="full">
+      <VStack {...group} w="full">
+        {options.map(({ value, label }) => {
+          const radio = getRadioProps({ value });
+          return (
+            <RadioCard key={value} {...radio}>
+              {label}
+            </RadioCard>
+          );
+        })}
+      </VStack>
+    </HStack>
   );
 };
 

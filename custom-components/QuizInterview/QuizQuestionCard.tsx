@@ -1,5 +1,6 @@
 import { Stack, Text } from '@chakra-ui/react';
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo } from 'react';
+import MarkdownContent from '../../components/MarkdownContent';
 import RadioCardGroup from '../../components/RadioCardGroup';
 import { QuizQuestion, QuizQuestionAnswer } from '../../types';
 
@@ -29,7 +30,7 @@ const QuizQuestionCard = (props: QuizQuestionCardProps) => {
       spacing={8}
       alignItems="center"
     >
-      <Text fontSize={{ base: 'xl', md: '2xl' }} fontWeight="semibold">{quizQuestion.question}</Text>
+      <MarkdownContent content={quizQuestion.question} />
 
       <RadioCardGroup
         options={answers}

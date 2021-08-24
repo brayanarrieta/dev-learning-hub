@@ -9,7 +9,7 @@ const RadioCard = (props: any) => {
   const checkbox = getCheckboxProps();
 
   return (
-    <Box as="label">
+    <Box as="label" w="full">
       <input {...input} />
       <Box
         {...checkbox}
@@ -28,7 +28,6 @@ const RadioCard = (props: any) => {
         }}
         px={5}
         py={3}
-        minWidth={{ base: '300px', md: '400px' }}
       >
         {children}
       </Box>
