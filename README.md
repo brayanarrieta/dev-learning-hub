@@ -28,7 +28,13 @@ Also there is an **.env.local.example** that could be used
 
 Please make sure of that because some environment variables are used to setup the application and the API request processes.
 
-After that we just need to run the client with the next command
+After that we need to insert some mocked data with the next command
+
+```
+npm run seeds
+```
+
+Once the seeds are inserted we can start the project as development environment with the next command
 
 ```
 npm run dev
