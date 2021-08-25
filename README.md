@@ -1,34 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Dev Learning Hub
 
-## Getting Started
+## Requirements
 
-First, run the development server:
+- Node >= 12.x
 
-```bash
-npm run dev
-# or
-yarn dev
+## Steps
+
+First of all we need to install the dependencies with the next command
+
+```
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+We need to create an **.env.local** file in main directory with the next content an fill with our configuration setup options. There is an **.env.sample** in the client that can be used.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```
+AUTH0_SECRET='use [openssl rand -hex 32] to generate a 32 bytes value'
+AUTH0_BASE_URL='http://localhost:3000'
+AUTH0_ISSUER_BASE_URL='https://YOUR_DOMAIN'
+AUTH0_CLIENT_ID='YOUR_CLIENT_ID'
+AUTH0_CLIENT_SECRET='YOUR_CLIENT_SECRET'
+MONGO_URI=mongodb+srv://DevLearningHubUser:<password>@devlearninghubmongoclus.lvnas.mongodb.net/development?retryWrites=true&w=majority
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.tsx`.
+Also there is an **.env.local.example** that could be used
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Please make sure of that because some environment variables are used to setup the application and the API request processes.
 
-## Learn More
+After that we just need to run the client with the next command
 
-To learn more about Next.js, take a look at the following resources:
+```
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Commands
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Linter with autofix
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
+npm run lint:fix
+```
