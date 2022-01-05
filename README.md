@@ -24,9 +24,8 @@ MONGO_URI=mongodb+srv://DevLearningHubUser:<password>@devlearninghubmongoclus.lv
 NEXT_PUBLIC_BASE_URL=http://localhost:3000
 ```
 
-Also there is an **.env.local.example** that could be used
 
-Please make sure of that because some environment variables are used to setup the application and the API request processes.
+Also there is an **.env.local.example** that could be used. Please make sure of that because some environment variables are used to setup the application and the API request processes. Also in the case of the Auth0 env varibles could be complex to get them you need to create a tenant and a application, you can follow the next [guide](https://auth0.com/docs/quickstart/webapp/nextjs/) for that or contact me. 
 
 After that we need to insert some mocked data with the next command
 
